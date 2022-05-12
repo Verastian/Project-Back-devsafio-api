@@ -10,7 +10,7 @@ app.use('/', routes);
 
 app.get('/', function (_req, res) {
   res.send({
-    name: 'NodeJS + ExpressJS boilerplate',
+    name: 'Devsafio API',
     environment: process.env.NODE_ENV
   });
 });
