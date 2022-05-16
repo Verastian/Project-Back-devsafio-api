@@ -1,6 +1,6 @@
-# NodeJS + ExpressJS boilerplate
+# Devsafio API
 
-Just a boilerplate for anyone in need of a basic boilerplate
+Proyecto para programa DLAB - Desafio Latam
 
 ## Usage
 Check the package.json file for `npm` commands
