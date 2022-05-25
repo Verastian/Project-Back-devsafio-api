@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  db:
+    container_name: devsafio_api_db
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  app:
+    container_name: devsafio_api_app
+    build: .
+    command: bash -c "npm run dev"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    depends_on:
+      - db

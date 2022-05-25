@@ -21,7 +21,7 @@ app.get('/ping', function (_req, res) {
 
 /* istanbul ignore if */
 if (!module.parent) {
-  const server = app.listen(8080, function () {
+  const server = app.listen(process.env.APP_PORT, function () {
     const port = server.address().port;
     console.log('Example app listening at http://localhost:%s', port);
   });
