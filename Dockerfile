@@ -14,4 +14,4 @@ RUN npm install
 COPY . .
 
 # start app in development
-CMD [ "npm", "run", "dev" ]
+# CMD [ "npm", "run", "dev" ]
