@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   db:
-    container_name: devsafio_api_db
+    container_name: ${DB_CONTAINER_NAME}
     image: postgres
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
@@ -12,7 +12,7 @@ services:
     networks:
       - postgres-network
   app:
-    container_name: devsafio_api_app
+    container_name: ${APP_CONTAINER_NAME}
     build: .
     command: bash -c "npm run dev"
     environment:
