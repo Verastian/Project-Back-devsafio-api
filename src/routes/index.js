@@ -1,18 +1,22 @@
-const express = require('express');
-const postRoute = require('./post.route');
+const express = require("express");
+const usersRoute = require("./user.route");
+const workProfileRoute = require("./workProfile.route");
 
 const router = express.Router();
 
 const defaultRoutes = [
-    {
-        path: '/posts',
-        route: postRoute
-    }
+  {
+    path: "/users",
+    route: usersRoute,
+  },
+  {
+    path: "/work-profiles",
+    route: workProfileRoute,
+  },
 ];
 
 for (const route of defaultRoutes) {
-    router.use(route.path, route.route);
+  router.use(route.path, route.route);
 }
 
 module.exports = router;
-
