@@ -1,14 +1,11 @@
 const { Sequelize } = require("sequelize");
 
-/* 
-! this setting is temporary 
-*/
 const sequelize = new Sequelize(
-  "devsafio_db", //db name
-  "postgres", //username
-  "postadmin123", //password of postgres
+  process.env.POSTGRES_DB, //db name
+  process.env.POSTGRES_USER, //username
+  process.env.POSTGRES_PASSWORD, //password of postgres
   {
-    host: "localhost",
+    host: "db",
     dialect: "postgres",
   }
 );

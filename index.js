@@ -4,12 +4,7 @@ const express = require("express");
 const routes = require("./src/routes");
 const sequelize = require("./src/config/database");
 
-/*const sequelize = new Sequelize(process.env.POSTGRES_DB, process.env.POSTGRES_USER, process.env.POSTGRES_PASSWORD, {
-  host: 'db',
-  dialect: 'postgres'
-});*/
-
- //we get the configuration from the config file/database
+// Database Initialization
 sequelize
   .sync({
     force: false,
@@ -28,9 +23,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/", routes);
-
-//models
-require("./src/models");
 
 app.get("/ping", function (_req, res) {
   res.send("pong");
