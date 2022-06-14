@@ -35,3 +35,4 @@ enter:
 
 enter-db:
 	docker exec -it $(DB_CONTAINER_NAME) /bin/bash -l
+

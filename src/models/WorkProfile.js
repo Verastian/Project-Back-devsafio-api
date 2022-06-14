@@ -2,7 +2,7 @@ const DataTypes = require("sequelize");
 const sequelize = require("../config/database");
 
 const WorkProfile = sequelize.define(
-  "workprofile",
+  "work_profiles",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -10,13 +10,9 @@ const WorkProfile = sequelize.define(
       autoIncrement: true,
       allowNull: false,
     },
-    branch_work: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    status: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
+    gender: {
+      type: DataTypes.ENUM("FEMALE", "MALE", "NEUTRAL"),
+      defaultValue: "NEUTRAL",
     },
     country: {
       type: DataTypes.STRING,
@@ -26,9 +22,9 @@ const WorkProfile = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    gender: {
-      type: DataTypes.ENUM("FEMALE", "MALE", "NEUTRAL"),
-      defaultValue: "NEUTRAL",
+    city: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
   },
   {

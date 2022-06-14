@@ -1,6 +1,7 @@
 const express = require("express");
 const usersRoute = require("./user.route");
 const workProfileRoute = require("./workProfile.route");
+const authRoute = require("./auth.route");
 
 const router = express.Router();
 
@@ -12,6 +13,10 @@ const defaultRoutes = [
   {
     path: "/work-profiles",
     route: workProfileRoute,
+  },
+  {
+    path: "/auth",
+    route: authRoute,
   },
 ];
 

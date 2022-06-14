@@ -1,23 +1,30 @@
-const userService = require("../sevices/user.service");
+const { wrapperAsync } = require("../middlewares/async-wrapper");
+const service = require("../services");
+const userService = service.userService;
 
-const getUsers = async (req, res) => {
+const getUsers = wrapperAsync(async (req, res) => {
   const getUsers = await userService.getUsers();
   res
     .status(200)
     .json({ success: true, message: "users obtained", data: getUsers });
-};
-const getUser = (req, res) => {
-  res.status(200).json({ success: true, message: "user obtained" });
-};
-const savetUser = (req, res) => {
+});
+
+const getUser = wrapperAsync(async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  const user = await userService.getUser({ id });
+
+  res.status(200).json({ success: true, message: "user obtained", data: user });
+});
+const savetUser = wrapperAsync(async (req, res) => {
   res.status(200).json({ success: true, message: "user saved" });
-};
-const updatetUser = (req, res) => {
+});
+const updatetUser = wrapperAsync(async (req, res) => {
   res.status(200).json({ success: true, message: "user updated" });
-};
-const deletetUser = (req, res) => {
+});
+const deletetUser = wrapperAsync(async (req, res) => {
   res.status(200).json({ success: true, message: "user deleted" });
-};
+});
 
 module.exports = {
   getUser,

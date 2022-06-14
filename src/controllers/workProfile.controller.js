@@ -1,18 +1,20 @@
-const getWorkProfile = (req, res) => {
+const { wrapperAsync } = require("../middlewares/async-wrapper");
+
+const getWorkProfile = wrapperAsync(async (req, res) => {
   res.status(200).json({ success: true, message: "Work Profile obtained" });
-};
-const getWorkProfiles = (req, res) => {
+});
+const getWorkProfiles = wrapperAsync(async (req, res) => {
   res.status(200).json({ success: true, message: "Work Profiles obtained" });
-};
-const saveWorkProfile = (req, res) => {
+});
+const saveWorkProfile = wrapperAsync(async (req, res) => {
   res.status(200).json({ success: true, message: "Work Profile saved" });
-};
-const updateWorkProfile = (req, res) => {
+});
+const updateWorkProfile = wrapperAsync(async (req, res) => {
   res.status(200).json({ success: true, message: "Work Profile updated" });
-};
-const deleteWorkProfile = (req, res) => {
+});
+const deleteWorkProfile = wrapperAsync(async (req, res) => {
   res.status(200).json({ success: true, message: "Work Profile deleted" });
-};
+});
 
 module.exports = {
   getWorkProfile,
