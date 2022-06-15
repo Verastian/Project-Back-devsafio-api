@@ -16,21 +16,21 @@ const getUser = wrapperAsync(async (req, res) => {
 
   res.status(200).json({ success: true, message: "user obtained", data: user });
 });
-const savetUser = wrapperAsync(async (req, res) => {
+const saveUser = wrapperAsync(async (req, res) => {
   res.status(200).json({ success: true, message: "user saved" });
 });
-const updatetUser = wrapperAsync(async (req, res) => {
+const updateUser = wrapperAsync(async (req, res) => {
   res.status(200).json({ success: true, message: "user updated" });
 });
-const deletetUser = wrapperAsync(async (req, res) => {
+const deleteUser = wrapperAsync(async (req, res) => {
   res.status(200).json({ success: true, message: "user deleted" });
 });
 
 module.exports = {
   getUser,
   getUsers,
-  savetUser,
-  updatetUser,
-  deletetUser,
+  saveUser,
+  updateUser,
+  deleteUser,
 };
 // TODO: we need to remove the "message" key from the json object. this is just to understand how it works
