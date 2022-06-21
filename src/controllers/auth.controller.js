@@ -30,7 +30,6 @@ const signIn = wrapperAsync(async (req, res) => {
 // register User
 const signUp = wrapperAsync(async (req, res) => {
   const { email, password, passwordConfirmation } = req.body;
-  console.log(password, passwordConfirmation);
 
   if (!(password === passwordConfirmation)) {
     return res
