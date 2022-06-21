@@ -2,7 +2,7 @@ const { Sequelize } = require("sequelize");
 
 //database wide options
 const opts = {
-  host: "db",
+  host: process.env.POSTGRES_HOST,
   dialect: "postgres",
   define: {
     //prevent sequelize from pluralizing table names
