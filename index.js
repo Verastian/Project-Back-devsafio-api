@@ -37,7 +37,7 @@ app.get("/ping", function (_req, res) {
 /* istanbul ignore if */
 //*This means: Run app.listen(8080) only if you are running the file
 if (!module.parent) {
-  const server = app.listen(process.env.APP_PORT, function () {
+  const server = app.listen(process.env.PORT, function () {
     const port = server.address().port;
     console.log("Example app listening at http://localhost:%s", port);
   });

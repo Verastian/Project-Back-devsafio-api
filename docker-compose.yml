@@ -21,7 +21,7 @@ services:
     volumes:
       - .:/usr/src/app
     ports:
-      - "${APP_PORT}:${APP_PORT}"
+      - "${PORT}:${PORT}"
     depends_on:
       - db
     networks:
