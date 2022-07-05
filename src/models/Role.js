@@ -15,7 +15,7 @@ const Role = sequelize.define(
     },
   },
   {
-    timestamps: false, //* if true get date create and update
+    timestamps: true,
   }
 );
 

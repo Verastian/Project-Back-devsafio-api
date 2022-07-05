@@ -2,7 +2,7 @@
 const User = require("./User");
 const WorkProfile = require("./WorkProfile");
 const WorkProfileRole = require("./WorkProfileRole");
-const ProfileStatus = require("./ProfileStatus");
+const UserStatus = require("./UserStatus");
 const Role = require("./Role");
 /*
  *
@@ -19,12 +19,12 @@ WorkProfile.belongsTo(User, { as: "users", foreignKey: "user_id" });
 
 /*
 /*
- *one-to-many relationship between "Users" and "ProfileStatus" models
+ *one-to-many relationship between "Users" and "UserStatus" models
  *where a profile status belongs to many users
  */
-ProfileStatus.hasMany(User, { foreignKey: "status_id" });
+UserStatus.hasMany(User, { foreignKey: "status_id" });
 
-User.belongsTo(ProfileStatus, { foreignKey: "status_id" });
+User.belongsTo(UserStatus, { foreignKey: "status_id" });
 
 /*
 /*
@@ -50,4 +50,4 @@ WorkProfileRole.belongsTo(Role, { foreignKey: "role_id" });
  */
 
 // *Add all models
-module.exports = { User, WorkProfile, Role, WorkProfileRole, ProfileStatus };
+module.exports = { User, WorkProfile, Role, WorkProfileRole, UserStatus };

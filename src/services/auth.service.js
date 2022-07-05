@@ -1,20 +1,18 @@
 const { wrapperCommon } = require("../middlewares/async-wrapper");
-const models = require("../models");
-const profileStatus = models.ProfileStatus;
-const user = models.User;
+const { User, userStatus }  = require("../models/");
 
 //*we get a user by Id obtained from params
 const getUserAuth = wrapperCommon(async (attr) => {
-  const userFound = await user.findOne({
+  const userFound = await User.findOne({
     where: attr,
-    include: profileStatus,
+    include: userStatus,
   });
   // userFound ? userFound : false;
   return userFound;
 });
 
 const createUserAuth = wrapperCommon(async (attr) => {
-  const userFound = await user.create(attr);
+  const userFound = await User.create(attr);
 
   return userFound;
 });

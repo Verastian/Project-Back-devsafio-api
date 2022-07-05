@@ -1,9 +1,12 @@
-const models = require("../models");
+const { User } = require("../models/");
 
-//*we get the users list
+const getUserByEmail = (email) => {
+  return User.findOne({ where: { email: email }});
+};
+
 const getUsers = async (req, res) => {
   try {
-    const users = await models.User.findAll();
+    const users = await User.findAll();
     return users;
   } catch (error) {
     console.error(error);
@@ -44,4 +47,4 @@ const deleteUser = (req, res) => {
   }
 };
 
-module.exports = { getUsers, getUser, saveUser, updateUser, deleteUser };
+module.exports = { getUserByEmail, getUsers, getUser, saveUser, updateUser, deleteUser };

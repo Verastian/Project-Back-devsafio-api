@@ -1,8 +1,8 @@
 const DataTypes = require("sequelize");
 const sequelize = require("../config/database");
 
-const ProfileStatus = sequelize.define(
-  "profile_statuses",
+const UserStatus = sequelize.define(
+  "user_statuses",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -15,8 +15,8 @@ const ProfileStatus = sequelize.define(
     },
   },
   {
-    timestamps: false, //* if true get date create and updpte
+    timestamps: true,
   }
 );
 
-module.exports = ProfileStatus;
+module.exports = UserStatus;

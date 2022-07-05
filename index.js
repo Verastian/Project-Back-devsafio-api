@@ -4,6 +4,7 @@ const sequelize = require("./src/config/database");
 
 const routes = require("./src/routes/");
 
+// TODO: use Sequalize Migrations instead of forcing
 sequelize
   .sync({
     force: false,

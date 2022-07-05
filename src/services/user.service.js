@@ -1,44 +1,50 @@
-const { wrapperCommon } = require("../middlewares/async-wrapper");
-const models = require("../models");
-const user = models.User;
+const { User } = require("../models/");
 
-//*we get the users list
-const getUsers = wrapperCommon(async (id, attr) => {
-  const users = await user.findAll();
-  return users;
-});
+const getUserByEmail = (email) => {
+  return User.findOne({ where: { email: email }});
+};
+
+const getUsers = async (req, res) => {
+  try {
+    const users = await User.findAll();
+    return users;
+  } catch (error) {
+    console.error(error);
+  }
+};
 //*we get a user by Id obtained from params
-const getUser = wrapperCommon(async (id, attr) => {
+const getUser = (req, res) => {
   try {
-    const userFound = await user.findOne({ where: id });
-    return userFound;
+    const { id } = req.params;
+    console.log(id);
   } catch (error) {
     console.error(error);
   }
-});
+};
 //*create
-const saveUser = wrapperCommon(async (id, attr) => {
+const saveUser = (req, res) => {
   try {
   } catch (error) {
     console.error(error);
   }
-});
+};
 //*update
-const updateUser = wrapperCommon(async (id, attr) => {
+const updateUser = (req, res) => {
   try {
     const { id } = req.params;
+    console.log(id);
   } catch (error) {
     console.error(error);
   }
-});
+};
 // *delete
-const deleteUser = wrapperCommon(async (id, attr) => {
+const deleteUser = (req, res) => {
   try {
     const { id } = req.params;
+    console.log(id);
   } catch (error) {
-    throw new Error(error)
-
+    console.error(error);
   }
-});
+};
 
-module.exports = { getUsers, getUser, saveUser, updateUser, deleteUser };
+module.exports = { getUserByEmail, getUsers, getUser, saveUser, updateUser, deleteUser };

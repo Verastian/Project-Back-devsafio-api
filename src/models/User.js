@@ -11,11 +11,9 @@ const User = sequelize.define(
     },
     name: {
       type: DataTypes.STRING,
-      // allowNull: false,
     },
-    lasName: {
+    lastname: {
       type: DataTypes.STRING,
-      // allowNull: false,
     },
     email: {
       type: DataTypes.STRING,
@@ -27,7 +25,7 @@ const User = sequelize.define(
     },
   },
   {
-    timestamps: false, //* if true get date create and update
+    timestamps: true,
   }
 );
 

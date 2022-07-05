@@ -1,55 +1,114 @@
+const { validationResult } = require('express-validator');
+const httpStatus = require('http-status');
 const { wrapperAsync } = require("../middlewares/async-wrapper");
-const { comparePassword, encryptPassword } = require("../utils/password.utils");
-const service = require("../services");
-const authService = service.authService;
+const { authService } = require("../services");
 const { createToken } = require("../utils/token.utils");
+const { comparePassword, encryptPassword } = require("../utils/password.utils");
 
 // login
-const signIn = wrapperAsync(async (req, res) => {
+const login = wrapperAsync(async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(httpStatus.BAD_REQUEST).json({
+      success: false,
+      message: "Invalid request",
+      data: ""
+    });
+  }
+
   // Request body email or username
   const { email, password } = req.body;
+
   const userFound = await authService.getUserAuth({ email });
 
   if (!userFound) {
     return res
-      .status(404)
-      .json({ succes: false, message: "The User cannot be Found" });
+      .status(httpStatus.NOT_FOUND)
+      .json({
+        success: false,
+        message: "User not found",
+        data: ""
+      });
   }
-  // console.log(password, userFound.password);
+
+  // TODO: this can be done using express-validator
   const matchPassword = await comparePassword(password, userFound.password); //tempPass = userFound.password
-  // console.log(matchPassword);
   if (!matchPassword) {
     return res
-      .status(401) //Unauthorized
-      .json({ succes: false, message: "The password does not match the user" });
-  }
-
-  res.status(200).json({ succes: true, user: userFound });
-});
-
-// register User
-const signUp = wrapperAsync(async (req, res) => {
-  const { email, password, passwordConfirmation } = req.body;
-
-  if (!(password === passwordConfirmation)) {
-    return res
-      .status(401)
-      .json({ succes: false, message: "Passwords do not match" });
-  }
-  const passHash = await encryptPassword(password);
-
-  const user = await authService.createUserAuth({ email, password: passHash });
-  if (!user) {
-    return res
-      .status(500)
-      .json({ succes: false, message: "The User cannot be created" });
+      .status(httpStatus.UNAUTHORIZED)
+      .json({
+        success: false,
+        message: "Invalid credentials",
+        data: ""
+      });
   }
 
   // Create a Token
-  const expiresIn = 60 * 60 * 24; // expires in 24 hours
-  const token = createToken({ id: user.id }, expiresIn);
+  const token = getToken({ id: userFound.id, name: userFound.name });
 
-  res.status(200).json({ succes: true, token });
+  res.status(httpStatus.OK).set({ 'Authorization': token }).json({
+    success: true,
+    message: "Login succesfull",
+    data: { user: userFound }
+  });
 });
 
-module.exports = { signIn, signUp };
+// register User
+const register = wrapperAsync(async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(httpStatus.BAD_REQUEST).json({
+      success: false,
+      message: "Invalid request",
+      data: ""
+    });
+  }
+
+  const { email, name, lastname, password, password_confirmation } = req.body.user;
+
+  if (!(password === password_confirmation)) {
+    return res
+      .status(httpStatus.BAD_REQUEST)
+      .json({
+        success: false,
+        message: "Passwords do not match",
+        data: ""
+      });
+  }
+  const passHash = await encryptPassword(password);
+
+  const user = await authService.createUserAuth({
+    email,
+    name,
+    lastname,
+    password: passHash
+  });
+  if (!user) {
+    return res
+      .status(httpStatus.INTERNAL_SERVER_ERROR)
+      .json({
+        success: false,
+        message: "User cannot be created",
+        data: ""
+      });
+  }
+
+  // Create a Token
+  const token = getToken({ id: user.id, name: user.name });
+
+  res.status(httpStatus.CREATED).set({ 'Authorization': token }).json({
+    success: true,
+    message: "User created successfully",
+    data: {
+      user
+    }
+  });
+});
+
+const getToken = (payload) => {
+  // Create a Token
+  const expiresIn = 60 * 60 * 24; // expires in 24 hours
+  return createToken(payload, expiresIn);
+};
+
+module.exports = { login, register };
