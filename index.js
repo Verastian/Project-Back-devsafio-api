@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const sequelize = require("./src/config/database");
+const cors = require("cors");
 
 const routes = require("./src/routes/");
 
@@ -17,6 +18,15 @@ sequelize
   });
 
 const app = express();
+
+// cors config
+var corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  allowedHeaders: 'Content-Type,Authorization'
+}
+
+app.use(cors(corsOptions));
 
 // middlewares
 app.use(express.json());
