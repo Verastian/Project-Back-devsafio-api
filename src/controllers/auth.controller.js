@@ -46,10 +46,14 @@ const login = wrapperAsync(async (req, res) => {
   // Create a Token
   const token = getToken({ id: userFound.id, name: userFound.name });
 
-  res.status(httpStatus.OK).set({ 'Authorization': token }).json({
+  const { id, name, lastname, email: userEmail, status_id } = userFound;
+
+
+  res.status(httpStatus.OK).json({
     success: true,
     message: "Login succesfull",
-    data: { user: userFound }
+    data: { user: { id, name, lastname, userEmail, status_id }},
+    token
   });
 });
 
@@ -93,15 +97,29 @@ const register = wrapperAsync(async (req, res) => {
       });
   }
 
-  // Create a Token
-  const token = getToken({ id: user.id, name: user.name });
+  const {
+    id: userId,
+    name: userName,
+    lastname: userLastname,
+    email: userEmail,
+    status: userStatus
+  } = user;
 
-  res.status(httpStatus.CREATED).set({ 'Authorization': token }).json({
+  // Create a Token
+  const token = getToken({ id: userId, name: userName });
+
+  res.status(httpStatus.CREATED).json({
     success: true,
     message: "User created successfully",
     data: {
-      user
-    }
+      user: {
+        name: userName,
+        lastname: userLastname,
+        email: userEmail,
+        status: userStatus
+      }
+    },
+    token
   });
 });
 
