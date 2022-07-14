@@ -7,15 +7,6 @@ const { comparePassword, encryptPassword } = require("../utils/password.utils");
 
 // login
 const login = wrapperAsync(async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(httpStatus.BAD_REQUEST).json({
-      success: false,
-      message: "Invalid request",
-      data: "",
-    });
-  }
-
   // Request body email or username
   const { email, password } = req.body;
 
@@ -55,25 +46,9 @@ const login = wrapperAsync(async (req, res) => {
 
 // register User
 const register = wrapperAsync(async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(httpStatus.BAD_REQUEST).json({
-      success: false,
-      message: "Invalid request",
-      data: "",
-    });
-  }
-
   const { email, name, lastname, password, password_confirmation } =
     req.body.user;
 
-  if (!(password === password_confirmation)) {
-    return res.status(httpStatus.BAD_REQUEST).json({
-      success: false,
-      message: "Passwords do not match",
-      data: "",
-    });
-  }
   const passHash = await encryptPassword(password);
 
   const user = await authService.createUserAuth({
