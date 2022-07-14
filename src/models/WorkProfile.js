@@ -37,10 +37,6 @@ const WorkProfile = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    dev_experience: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
     comment: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -70,7 +66,16 @@ const WorkProfile = sequelize.define(
         "estoy-disponible-para-migrar-a-otro-país"),
       allowNull: false,
     },
-    design: {
+    dev_experience: {
+      type: DataTypes.ENUM(
+        "sin-experiencia",
+        "0-a-1-años",
+        "1-a-2-años",
+        "2-a-4-años",
+        "5+-años"),
+      allowNull: false
+    },
+    design_experience: {
       type: DataTypes.ENUM(
         "sin-experiencia",
         "0-a-1-años",
@@ -78,6 +83,15 @@ const WorkProfile = sequelize.define(
         "2-a-4-años",
         "5+-años"),
       allowNull: false,
+    },
+    data_experience: {
+      type: DataTypes.ENUM(
+        "sin-experiencia",
+        "0-a-1-años",
+        "1-a-2-años",
+        "2-a-4-años",
+        "5+-años"),
+      allowNull: false
     },
     gender: {
       type: DataTypes.ENUM(
