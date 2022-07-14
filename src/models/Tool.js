@@ -1,8 +1,8 @@
-const DataTypes = require("sequelize");
-const sequelize = require("../config/database");
+const DataTypes = require('sequelize')
+const sequelize = require('../config/database')
 
-const Role = sequelize.define(
-  "roles", {
+const Tool = sequelize.define(
+  'tools', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -15,4 +15,4 @@ const Role = sequelize.define(
   }
 );
 
-module.exports = Role;
+module.exports = Tool;

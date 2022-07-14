@@ -1,5 +1,5 @@
-const { validationResult } = require('express-validator');
-const httpStatus = require('http-status');
+const { validationResult } = require("express-validator");
+const httpStatus = require("http-status");
 const { wrapperAsync } = require("../middlewares/async-wrapper");
 const { authService } = require("../services");
 const { createToken } = require("../utils/token.utils");
@@ -12,7 +12,7 @@ const login = wrapperAsync(async (req, res) => {
     return res.status(httpStatus.BAD_REQUEST).json({
       success: false,
       message: "Invalid request",
-      data: ""
+      data: "",
     });
   }
 
@@ -22,25 +22,21 @@ const login = wrapperAsync(async (req, res) => {
   const userFound = await authService.getUserAuth({ email });
 
   if (!userFound) {
-    return res
-      .status(httpStatus.NOT_FOUND)
-      .json({
-        success: false,
-        message: "User not found",
-        data: ""
-      });
+    return res.status(httpStatus.NOT_FOUND).json({
+      success: false,
+      message: "User not found",
+      data: "",
+    });
   }
 
   // TODO: this can be done using express-validator
   const matchPassword = await comparePassword(password, userFound.password); //tempPass = userFound.password
   if (!matchPassword) {
-    return res
-      .status(httpStatus.UNAUTHORIZED)
-      .json({
-        success: false,
-        message: "Invalid credentials",
-        data: ""
-      });
+    return res.status(httpStatus.UNAUTHORIZED).json({
+      success: false,
+      message: "Invalid credentials",
+      data: "",
+    });
   }
 
   // Create a Token
@@ -64,20 +60,19 @@ const register = wrapperAsync(async (req, res) => {
     return res.status(httpStatus.BAD_REQUEST).json({
       success: false,
       message: "Invalid request",
-      data: ""
+      data: "",
     });
   }
 
-  const { email, name, lastname, password, password_confirmation } = req.body.user;
+  const { email, name, lastname, password, password_confirmation } =
+    req.body.user;
 
   if (!(password === password_confirmation)) {
-    return res
-      .status(httpStatus.BAD_REQUEST)
-      .json({
-        success: false,
-        message: "Passwords do not match",
-        data: ""
-      });
+    return res.status(httpStatus.BAD_REQUEST).json({
+      success: false,
+      message: "Passwords do not match",
+      data: "",
+    });
   }
   const passHash = await encryptPassword(password);
 
@@ -85,16 +80,14 @@ const register = wrapperAsync(async (req, res) => {
     email,
     name,
     lastname,
-    password: passHash
+    password: passHash,
   });
   if (!user) {
-    return res
-      .status(httpStatus.INTERNAL_SERVER_ERROR)
-      .json({
-        success: false,
-        message: "User cannot be created",
-        data: ""
-      });
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: "User cannot be created",
+      data: "",
+    });
   }
 
   const {

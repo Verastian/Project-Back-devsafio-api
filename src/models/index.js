@@ -1,53 +1,91 @@
-// const associations = require("./associations");
-const User = require("./User");
-const WorkProfile = require("./WorkProfile");
-const WorkProfileRole = require("./WorkProfileRole");
-const UserStatus = require("./UserStatus");
 const Role = require("./Role");
-/*
- *
- *this file manages the associations between the models
- */
+const User = require("./User");
+const Tool = require("./Tool");
+const Database = require("./Database");
+const SoftSkill = require("./SoftSkill");
+const UserStatus = require("./UserStatus");
+const DevLanguage = require("./DevLanguage");
+const EducationExperience = require("./EducationExperience");
+const WorkProfile = require("./WorkProfile");
+const WorkProfileTool = require("./WorkProfileTool");
+const WorkProfileRole = require("./WorkProfileRole");
+const WorkProfileDatabase = require('./WorkProfileDatabase');
+const WorkProfileSoftSkill = require("./WorkProfileSoftSkill");
+const WorkProfileDevLanguage = require('./WorkProfileDevLanguage');
+const WorkProfileEducationExperience = require("./WorkProfileEducationExperience");
 
-/*
- *one-to-one relationship between "users" and "work profile" models
- *where a user has a work profile
- */
-User.hasOne(WorkProfile, { as: "workprofiles", foreignKey: "user_id" });
+// User relations
+User.hasOne(WorkProfile, { foreignKey: "user_id" });
+User.belongsTo(UserStatus, { foreignKey: 'status_id' });
 
-WorkProfile.belongsTo(User, { as: "users", foreignKey: "user_id" });
-
-/*
-/*
- *one-to-many relationship between "Users" and "UserStatus" models
- *where a profile status belongs to many users
- */
+// UserStatus relations
 UserStatus.hasMany(User, { foreignKey: "status_id" });
 
-User.belongsTo(UserStatus, { foreignKey: "status_id" });
+// WorkProfile relations
+WorkProfile.belongsTo(User, { foreignKey: "user_id" });
+WorkProfile.belongsToMany(EducationExperience, {
+  through: WorkProfileEducationExperience
+});
+WorkProfile.belongsToMany(DevLanguage, {
+  through: WorkProfileDevLanguage
+});
+WorkProfile.belongsToMany(SoftSkill, {
+  through: WorkProfileSoftSkill
+});
+WorkProfile.belongsToMany(Tool, {
+  through: WorkProfileTool
+});
+WorkProfile.belongsToMany(Role, {
+  through: WorkProfileRole
+});
+WorkProfile.belongsToMany(Database, {
+  through: WorkProfileDatabase
+});
 
-/*
-/*
- *one-to-many relationship between "Workprofile" and "WorkprofileRole" models
- *where a work profile belongs to many work profile roles
- */
-WorkProfile.hasMany(WorkProfileRole, { foreignKey: "workprofile_id" });
+// EducationExperience relations
+EducationExperience.belongsToMany(WorkProfile, {
+  through: WorkProfileEducationExperience
+});
 
-WorkProfileRole.belongsTo(WorkProfile, { foreignKey: "workprofile_id" });
+// DevLanguage relations
+DevLanguage.belongsToMany(WorkProfile, {
+  through: WorkProfileDevLanguage
+});
 
-/*
-/*
- *one-to-many relationship between "Role" and "WorkProfileRole" models
- *where a role belongs to many work profile roles
- */
-Role.hasMany(WorkProfileRole, { foreignKey: "role_id" });
+// SoftSkill relations
+SoftSkill.belongsToMany(WorkProfile, {
+  through: WorkProfileSoftSkill
+});
 
-WorkProfileRole.belongsTo(Role, { foreignKey: "role_id" });
+// Tool relations
+Tool.belongsToMany(WorkProfile, {
+  through: WorkProfileTool
+});
 
-/*
-/*
- *other relationship
- */
+// Role relations
+Role.belongsToMany(WorkProfile, {
+  through: WorkProfileRole
+});
 
-// *Add all models
-module.exports = { User, WorkProfile, Role, WorkProfileRole, UserStatus };
+// Database relations
+Database.belongsToMany(WorkProfile, {
+  through: WorkProfileDatabase
+});
+
+module.exports = {
+  Role,
+  User,
+  Tool,
+  Database,
+  SoftSkill,
+  UserStatus,
+  DevLanguage,
+  EducationExperience,
+  WorkProfile,
+  WorkProfileTool,
+  WorkProfileRole,
+  WorkProfileDatabase,
+  WorkProfileSoftSkill,
+  WorkProfileDevLanguage,
+  WorkProfileEducationExperience
+};
