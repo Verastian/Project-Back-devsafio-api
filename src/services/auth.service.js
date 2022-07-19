@@ -1,4 +1,4 @@
-const { User, UserStatus }  = require("../models/");
+const { User, UserStatus } = require("../models");
 const { getUserStatusByName } = require("./user_status.service");
 
 const STATUS_ACTIVE = "active";

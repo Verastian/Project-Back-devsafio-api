@@ -1,91 +1,37 @@
-const Role = require("./Role");
-const User = require("./User");
-const Tool = require("./Tool");
-const Database = require("./Database");
-const SoftSkill = require("./SoftSkill");
-const UserStatus = require("./UserStatus");
-const DevLanguage = require("./DevLanguage");
-const EducationExperience = require("./EducationExperience");
-const WorkProfile = require("./WorkProfile");
-const WorkProfileTool = require("./WorkProfileTool");
-const WorkProfileRole = require("./WorkProfileRole");
-const WorkProfileDatabase = require('./WorkProfileDatabase');
-const WorkProfileSoftSkill = require("./WorkProfileSoftSkill");
-const WorkProfileDevLanguage = require('./WorkProfileDevLanguage');
-const WorkProfileEducationExperience = require("./WorkProfileEducationExperience");
+'use strict';
 
-// User relations
-User.hasOne(WorkProfile, { foreignKey: "user_id" });
-User.belongsTo(UserStatus, { foreignKey: 'status_id' });
+const fs = require('fs');
+const path = require('path');
+const Sequelize = require('sequelize');
+const basename = path.basename(__filename);
+const env = process.env.NODE_ENV || 'development';
+const config = require(__dirname + '/../config/config.js')[env];
+const db = {};
 
-// UserStatus relations
-UserStatus.hasMany(User, { foreignKey: "status_id" });
+let sequelize;
+if (config.use_env_variable) {
+  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+} else {
+  sequelize = new Sequelize(config.database, config.username, config.password, config);
+}
 
-// WorkProfile relations
-WorkProfile.belongsTo(User, { foreignKey: "user_id" });
-WorkProfile.belongsToMany(EducationExperience, {
-  through: WorkProfileEducationExperience
-});
-WorkProfile.belongsToMany(DevLanguage, {
-  through: WorkProfileDevLanguage
-});
-WorkProfile.belongsToMany(SoftSkill, {
-  through: WorkProfileSoftSkill
-});
-WorkProfile.belongsToMany(Tool, {
-  through: WorkProfileTool
-});
-WorkProfile.belongsToMany(Role, {
-  through: WorkProfileRole
-});
-WorkProfile.belongsToMany(Database, {
-  through: WorkProfileDatabase
+fs
+  .readdirSync(__dirname)
+  .filter(file => {
+    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
+  })
+  .forEach(file => {
+    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
+    db[model.name] = model;
+  });
+
+Object.keys(db).forEach(modelName => {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+  }
 });
 
-// EducationExperience relations
-EducationExperience.belongsToMany(WorkProfile, {
-  through: WorkProfileEducationExperience
-});
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
 
-// DevLanguage relations
-DevLanguage.belongsToMany(WorkProfile, {
-  through: WorkProfileDevLanguage
-});
-
-// SoftSkill relations
-SoftSkill.belongsToMany(WorkProfile, {
-  through: WorkProfileSoftSkill
-});
-
-// Tool relations
-Tool.belongsToMany(WorkProfile, {
-  through: WorkProfileTool
-});
-
-// Role relations
-Role.belongsToMany(WorkProfile, {
-  through: WorkProfileRole
-});
-
-// Database relations
-Database.belongsToMany(WorkProfile, {
-  through: WorkProfileDatabase
-});
-
-module.exports = {
-  Role,
-  User,
-  Tool,
-  Database,
-  SoftSkill,
-  UserStatus,
-  DevLanguage,
-  EducationExperience,
-  WorkProfile,
-  WorkProfileTool,
-  WorkProfileRole,
-  WorkProfileDatabase,
-  WorkProfileSoftSkill,
-  WorkProfileDevLanguage,
-  WorkProfileEducationExperience
-};
+module.exports = db;
