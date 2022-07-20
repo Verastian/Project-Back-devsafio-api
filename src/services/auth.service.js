@@ -8,6 +8,7 @@ const getUserAuth = async (attr) => {
   const userFound = await User.findOne({
     where: attr,
     include: UserStatus,
+
   });
 
   return userFound;
