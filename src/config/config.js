@@ -1,36 +1,14 @@
+require('dotenv').config()
 
-/* {
-  "development": {
-    "username": "app",
-    "password": "password",
-    "database": "devsafio-api-development",
-    "host": "db",
-    "dialect": "postgres"
-  },
-  "test": {
-    "username": "app",
-    "password": "password",
-    "database": "devsafio-api-development",
-    "host": "db",
-    "dialect": "postgres"
-  },
-  "production": {
-    "username": "app",
-    "password": "password",
-    "database": "devsafio-api-development",
-    "host": "db",
-    "dialect": "postgres"
-  }
-}
- */
+
 module.exports = {
   development: {
-    username: process.env.POSTGRES_USER,
-    password: process.env.POSTGRES_PASSWORD,
-    database: process.env.POSTGRES_DB,
-    host: process.env.POSTGRES_HOST,
+    url: process.env.DATABASE_URL,
+    /* 'username': process.env.POSTGRES_USER,
+    'password': process.env.POSTGRES_PASSWORD,
+    'host': process.env.POSTGRES_HOST, */
     dialect: "postgres",
-    dialectOptions: process.env.NODE_ENV !== 'production' ? {} : {
+    /* dialectOptions: process.env.NODE_ENV !== 'production' ? {} : {
       ssl: {
         require: true,
         rejectUnauthorized: false
@@ -38,8 +16,8 @@ module.exports = {
     },
     define: {
       //prevent sequelize from pluralizing table names
-      freezeTableName: true,
-    },
+      //freezeTableName: true,
+    }, */
   },
   production: {
     username: process.env.POSTGRES_USER,
@@ -55,7 +33,7 @@ module.exports = {
     },
     define: {
       //prevent sequelize from pluralizing table names
-      freezeTableName: true,
+      // freezeTableName: true,
     },
   },
 }
