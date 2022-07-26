@@ -11,12 +11,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Database.belongsToMany(models.WorkProfile, {
-        through: 'WorkProfileDatabase',
-        foreignKey: 'workprofile_id',
-        onDelete: 'CASCADE',
-        // onUpdate: 'CASCADE', // optional
-      });
     }
   }
   Database.init({

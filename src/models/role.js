@@ -11,12 +11,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Role.belongsToMany(models.WorkProfile, {
-        through: 'WorkProfileRole',
-        foreignKey: 'worprofile_id',
-        onDelete: 'CASCADE',
-        // onUpdate: 'CASCADE', // optional
-      });
     }
   }
   Role.init({
@@ -24,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Role',
-    underscored: true,
   });
   return Role;
 };

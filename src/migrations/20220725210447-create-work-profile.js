@@ -1,36 +1,51 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('WorkProfiles', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      country: {
         type: Sequelize.STRING
       },
-      lastname: {
+      phone_number: {
         type: Sequelize.STRING
       },
-      email: {
+      city: {
         type: Sequelize.STRING
       },
-      password: {
+      cv_url: {
         type: Sequelize.STRING
       },
-      created_at: {
+      linkendin_url: {
+        type: Sequelize.STRING
+      },
+      github_url: {
+        type: Sequelize.STRING
+      },
+      featured_project: {
+        type: Sequelize.STRING
+      },
+      other_technologies_comment: {
+        type: Sequelize.STRING
+      },
+      ideal_work_comment: {
+        type: Sequelize.STRING
+      },
+      createdAt: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updated_at: {
+      updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('WorkProfiles');
   }
 };

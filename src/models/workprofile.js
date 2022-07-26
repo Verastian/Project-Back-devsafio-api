@@ -11,43 +11,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      WorkProfile.hasOne(models.User, { foreignKey: 'user_id', as: 'user' })
-      WorkProfile.belongsToMany(models.EducationExperience, {
-        through: 'WorkProfileEducationExperience',
-        foreignKey: 'educationExperience_id',
-        onDelete: 'CASCADE',
-        // onUpdate: 'CASCADE', // optional
-      });
-      WorkProfile.belongsToMany(models.DevLanguage, {
-        through: 'WorkProfileDevLanguage',
-        foreignKey: 'devLanguage_id',
-        onDelete: 'CASCADE',
-        // onUpdate: 'CASCADE', // optional
-      });
-      WorkProfile.belongsToMany(models.SoftSkill, {
-        through: 'WorkProfileSoftSkill',
-        foreignKey: 'softskill_id',
-        onDelete: 'CASCADE',
-        // onUpdate: 'CASCADE', // optional
-      });
-      WorkProfile.belongsToMany(models.Tool, {
-        through: 'WorkProfileTool',
-        foreignKey: 'tool_id',
-        onDelete: 'CASCADE',
-        // onUpdate: 'CASCADE', // optional
-      });
-      WorkProfile.belongsToMany(models.Role, {
-        through: 'WorkProfileRole',
-        foreignKey: 'role_id',
-        onDelete: 'CASCADE',
-        // onUpdate: 'CASCADE', // optional
-      });
-      WorkProfile.belongsToMany(models.Database, {
-        through: 'WorkProfileDatabase',
-        foreignKey: 'database_id',
-        onDelete: 'CASCADE',
-        // onUpdate: 'CASCADE', // optional
-      });
     }
   }
   WorkProfile.init({

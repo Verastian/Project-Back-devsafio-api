@@ -11,12 +11,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Tool.belongsToMany(models.WorkProfile, {
-        through: 'WorkProfileTool',
-        foreignKey: 'workprofile_id',
-        onDelete: 'CASCADE',
-        // onUpdate: 'CASCADE', // optional
-      });
     }
   }
   Tool.init({
