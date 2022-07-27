@@ -35,6 +35,43 @@ module.exports = {
       ideal_work_comment: {
         type: Sequelize.STRING
       },
+      educational_level: {
+        type: Sequelize.ENUM
+      },
+      relocation_option: {
+        type: Sequelize.ENUM
+      },
+      dev_experience: {
+        type: Sequelize.ENUM
+      },
+      design_experience: {
+        type: Sequelize.ENUM
+      },
+      data_experience: {
+        type: Sequelize.ENUM
+      },
+      gender: {
+        type: Sequelize.ENUM
+      },
+      english_level: {
+        type: Sequelize.ENUM
+      },
+      work_availability: {
+        type: Sequelize.ENUM
+      },
+      education_status: {
+        type: Sequelize.ENUM
+      },
+      visa: {
+        type: Sequelize.ENUM
+      },
+      user_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'User',
+          key: 'id'
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

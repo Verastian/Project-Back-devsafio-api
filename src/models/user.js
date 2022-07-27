@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.hasOne(models.WorkProfile, { foreignKey: "user_id" });
+      User.belongsTo(models.UserStatus)
     }
   }
   User.init({

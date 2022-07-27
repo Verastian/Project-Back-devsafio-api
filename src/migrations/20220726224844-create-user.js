@@ -20,6 +20,13 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
+      status_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'UserStatus',
+          key: 'id'
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

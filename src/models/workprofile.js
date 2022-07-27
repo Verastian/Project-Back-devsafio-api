@@ -11,6 +11,47 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      WorkProfile.hasOne(models.User, {
+        foreignKey: 'user_id',
+        onDelete: 'CASCADE',
+        // onUpdate: 'CASCADE', // optional
+      });
+      WorkProfile.belongsToMany(models.Database, {
+        through: 'WorkProfileDatabase',
+        foreignKey: 'workprofile_id',
+        onDelete: 'CASCADE',
+        // onUpdate: 'CASCADE', // optional
+      });
+      WorkProfile.belongsToMany(models.DevLanguage, {
+        through: 'WorkProfileDevLanguage',
+        foreignKey: 'workprofile_id',
+        onDelete: 'CASCADE',
+        // onUpdate: 'CASCADE', // optional
+      });
+      WorkProfile.belongsToMany(models.EducationExperience, {
+        through: 'WorkProfileEducationExperience',
+        foreignKey: 'workprofile_id',
+        onDelete: 'CASCADE',
+        // onUpdate: 'CASCADE', // optional
+      });
+      WorkProfile.belongsToMany(models.SoftSkill, {
+        through: 'WorkProfileSoftSkill',
+        foreignKey: 'workprofile_id',
+        onDelete: 'CASCADE',
+        // onUpdate: 'CASCADE', // optional
+      });
+      WorkProfile.belongsToMany(models.Tool, {
+        through: 'WorkProfileTool',
+        foreignKey: 'workprofile_id',
+        onDelete: 'CASCADE',
+        // onUpdate: 'CASCADE', // optional
+      });
+      WorkProfile.belongsToMany(models.Role, {
+        through: 'WorkProfileRole',
+        foreignKey: 'workprofile_id',
+        onDelete: 'CASCADE',
+        // onUpdate: 'CASCADE', // optional
+      });
     }
   }
   WorkProfile.init({
@@ -23,37 +64,26 @@ module.exports = (sequelize, DataTypes) => {
     featured_project: DataTypes.STRING,
     other_technologies_comment: DataTypes.STRING,
     ideal_work_comment: DataTypes.STRING,
-    gender: {
+    educational_level: {
       type: DataTypes.ENUM, values: [
-        "masculino",
-        "femenino",
-        "otro",
-        "prefiero-no-decirlo"],
-      allowNull: false,
+        "universidad-completa",
+        "universidad-incompleta-o-en-curso",
+        "instituto-profesional-o-cft-completa",
+        "instituto-profesional-o-cft-incompleta-o-en-curso",
+        "educación-media-completa",
+        "bootcamp-completo",
+        "bootcamp-incompleto-o-en-curso",
+        "escolar-completa",
+        "escolar-incompleta",
+
+      ],
+      allowNull: false
     },
-    education_status: {
+    relocation_option: {
       type: DataTypes.ENUM, values: [
-        "egresado/a",
-        "titulado/a",
-        "en-curso"],
-      allowNull: false,
-    },
-    english_level: {
-      type: DataTypes.ENUM, values: [
-        "ninguno",
-        "principiante-a1",
-        "principiante-a2",
-        "pre-intermedio-b1",
-        "intermedio-b2",
-        "intermedio-avanzado-c1",
-        "avanzado-c2"],
-      allowNull: false,
-    },
-    work_availability: {
-      type: DataTypes.ENUM, values: [
-        "fulltime",
-        "part-time",
-        "freelancer"],
+        "quiero-trabajo-desde-mi-ciudad",
+        "estoy-disponible-a-migrar-de-mi-ciudad-dentro-de-mi-país",
+        "estoy-disponible-para-migrar-a-otro-país"],
       allowNull: false,
     },
     dev_experience: {
@@ -83,26 +113,37 @@ module.exports = (sequelize, DataTypes) => {
         "5+-años"],
       allowNull: false
     },
-    educational_level: {
+    gender: {
       type: DataTypes.ENUM, values: [
-        "universidad-completa",
-        "universidad-incompleta-o-en-curso",
-        "instituto-profesional-o-cft-completa",
-        "instituto-profesional-o-cft-incompleta-o-en-curso",
-        "educación-media-completa",
-        "bootcamp-completo",
-        "bootcamp-incompleto-o-en-curso",
-        "escolar-completa",
-        "escolar-incompleta",
-
-      ],
-      allowNull: false
+        "masculino",
+        "femenino",
+        "otro",
+        "prefiero-no-decirlo"],
+      allowNull: false,
     },
-    relocation_option: {
+    english_level: {
       type: DataTypes.ENUM, values: [
-        "quiero-trabajo-desde-mi-ciudad",
-        "estoy-disponible-a-migrar-de-mi-ciudad-dentro-de-mi-país",
-        "estoy-disponible-para-migrar-a-otro-país"],
+        "ninguno",
+        "principiante-a1",
+        "principiante-a2",
+        "pre-intermedio-b1",
+        "intermedio-b2",
+        "intermedio-avanzado-c1",
+        "avanzado-c2"],
+      allowNull: false,
+    },
+    work_availability: {
+      type: DataTypes.ENUM, values: [
+        "fulltime",
+        "part-time",
+        "freelancer"],
+      allowNull: false,
+    },
+    education_status: {
+      type: DataTypes.ENUM, values: [
+        "egresado/a",
+        "titulado/a",
+        "en-curso"],
       allowNull: false,
     },
     visa: {
@@ -113,7 +154,6 @@ module.exports = (sequelize, DataTypes) => {
         "otros-paises"],
       allowNull: false,
     },
-
   }, {
     sequelize,
     modelName: 'WorkProfile',
