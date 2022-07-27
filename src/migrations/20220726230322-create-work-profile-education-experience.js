@@ -14,7 +14,7 @@ module.exports = {
       workprofile_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Database',
+          model: 'WorkProfiles',
           key: 'id'
         },
         allowNull: false,
@@ -22,7 +22,7 @@ module.exports = {
       educationExperience_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'EducationExperience',
+          model: 'EducationExperiences',
           key: 'id'
         },
         allowNull: false,

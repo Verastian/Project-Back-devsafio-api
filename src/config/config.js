@@ -7,12 +7,12 @@ module.exports = {
     database: process.env.POSTGRES_DB,
     host: process.env.POSTGRES_HOST,
     dialect: "postgres",
-    dialectOptions: {
+    /* dialectOptions: {
       ssl: {
         require: true,
         rejectUnauthorized: false
       }
-    },
+    }, */
     define: {
       //prevent sequelize from pluralizing table names
       //freezeTableName: true,

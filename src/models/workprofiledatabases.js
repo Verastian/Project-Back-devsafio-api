@@ -14,7 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   workProfileDatabase.init({
-    level: DataTypes.INTEGER
+    level: DataTypes.INTEGER,
+    workprofile_id: DataTypes.INTEGER,
+    database_id: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'WorkProfileDatabase',

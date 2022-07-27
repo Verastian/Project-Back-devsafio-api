@@ -14,7 +14,7 @@ module.exports = {
       workprofile_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Database',
+          model: 'WorkProfiles',
           key: 'id'
         },
 
@@ -23,7 +23,7 @@ module.exports = {
       role_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Role',
+          model: 'Roles',
           key: 'id'
         },
         allowNull: false,

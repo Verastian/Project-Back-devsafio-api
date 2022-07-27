@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   workProfileDevLanguage.init({
-    level: DataTypes.INTEGER
+    level: DataTypes.INTEGER,
+    workprofile_id: DataTypes.INTEGER,
+    devLanguage_id: DataTypes.INTEGER,
+
   }, {
     sequelize,
     modelName: 'WorkProfileDevLanguage',
