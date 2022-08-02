@@ -154,6 +154,7 @@ module.exports = (sequelize, DataTypes) => {
         "otros-paises"],
       allowNull: false,
     },
+    user_id: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'WorkProfile',

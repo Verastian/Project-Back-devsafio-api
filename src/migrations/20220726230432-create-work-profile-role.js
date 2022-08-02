@@ -17,7 +17,6 @@ module.exports = {
           model: 'WorkProfiles',
           key: 'id'
         },
-
         allowNull: false,
       },
       role_id: {
