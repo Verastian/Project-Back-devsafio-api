@@ -2,7 +2,11 @@ const { wrapperCommon } = require("../middlewares/async-wrapper");
 const { WorkProfile } = require("../models")
 
 
+const createWorkProfile = wrapperCommon(async (attr) => {
 
+    const workProfileOfAUser = await WorkProfile.create({ attr })
+    return workProfileOfAUser
+})
 
 const getDataWorkprofile = wrapperCommon(() => {
     const educationLevels = WorkProfile.getAttributes().educational_level.values
@@ -33,4 +37,5 @@ const getDataWorkprofile = wrapperCommon(() => {
 
 module.exports = {
     getDataWorkprofile,
+    createWorkProfile
 }

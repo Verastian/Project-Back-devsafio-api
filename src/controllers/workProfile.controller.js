@@ -11,12 +11,33 @@ const getWorkProfiles = wrapperAsync(async (req, res) => {
 });
 const createWorkProfile = wrapperAsync(async (req, res) => {
 
+  const { work_profile } = req.body
+
+  console.log(work_profile)
+
+  const newWorkProfile = await workProfileService.createWorkProfile({
+    work_profile
+  })
+
+  if (!newWorkProfile) {
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: "work profile cannot be created",
+      data: "",
+    });
+  }
+
+
   res.status(httpStatus.CREATED).json({
     success: true,
     message: "Created successfully",
-    data: req.body
+    data: ""
   });
+
+
 });
+
+
 const saveWorkProfile = wrapperAsync(async (req, res) => {
   res.status(200).json({ success: true, message: "Work Profile saved" });
 });
