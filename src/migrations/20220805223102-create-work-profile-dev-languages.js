@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('workProfileDatabases', {
+    await queryInterface.createTable('WorkProfileDevLanguages', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,20 +12,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       workprofile_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'WorkProfiles',
-          key: 'id'
-        },
-        allowNull: false,
+        type: Sequelize.INTEGER
       },
-      database_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Databases',
-          key: 'id',
-        },
-        allowNull: false,
+      devLanguage_id: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -38,6 +28,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('workProfileDatabases');
+    await queryInterface.dropTable('WorkProfileDevLanguages');
   }
 };

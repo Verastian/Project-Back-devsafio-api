@@ -14,9 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   WorkProfileRole.init({
-    count: DataTypes.INTEGER,
     workprofile_id: DataTypes.INTEGER,
-    role_id: DataTypes.INTEGER,
+    role_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'WorkProfileRole',

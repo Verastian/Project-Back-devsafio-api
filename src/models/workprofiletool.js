@@ -14,10 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   WorkProfileTool.init({
-    count: DataTypes.INTEGER,
     workprofile_id: DataTypes.INTEGER,
-    tool_id: DataTypes.INTEGER,
-
+    tool_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'WorkProfileTool',

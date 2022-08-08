@@ -1,10 +1,31 @@
+
 const { wrapperCommon } = require("../middlewares/async-wrapper");
-const { WorkProfile } = require("../models")
+const { WorkProfile, Database, WorkProfileDatabases } = require("../models");
+const workprofile = require("../models/workprofile");
+
+const getWorkProfile = wrapperCommon(async (id) => {
+    const workprofile = await WorkProfile.findOne({
+        where: id,
+        include: { model: Database }
+    })
+    return workprofile;
+})
 
 
 const createWorkProfile = wrapperCommon(async (attr) => {
-
-    const workProfileOfAUser = await WorkProfile.create({ attr })
+    // console.log(attr)
+    const workProfileOfAUser = await WorkProfile.create(attr,
+        // {
+        //     include: Database
+        // }
+    )
+    const DatabaseList = []
+    for (const data of attr.database) {
+        // { through: { level: data.level }
+        const foundDatabase = await Database.findOne({ where: data.database_id })
+        DatabaseList.push(foundDatabase)
+    }
+    workProfileOfAUser.setDatabases(DatabaseList)
     return workProfileOfAUser
 })
 
@@ -37,5 +58,6 @@ const getDataWorkprofile = wrapperCommon(() => {
 
 module.exports = {
     getDataWorkprofile,
-    createWorkProfile
+    createWorkProfile,
+    getWorkProfile
 }

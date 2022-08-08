@@ -14,9 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   WorkProfileSoftSkill.init({
-    count: DataTypes.INTEGER,
     workprofile_id: DataTypes.INTEGER,
-    softskill_id: DataTypes.INTEGER,
+    softSkill_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'WorkProfileSoftSkill',

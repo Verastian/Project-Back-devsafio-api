@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class workProfileDevLanguage extends Model {
+  class WorkProfileDevLanguages extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,14 +13,13 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  workProfileDevLanguage.init({
+  WorkProfileDevLanguages.init({
     level: DataTypes.INTEGER,
     workprofile_id: DataTypes.INTEGER,
-    devLanguage_id: DataTypes.INTEGER,
-
+    devLanguage_id: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'WorkProfileDevLanguage',
+    modelName: 'WorkProfileDevLanguages',
   });
-  return workProfileDevLanguage;
+  return WorkProfileDevLanguages;
 };
