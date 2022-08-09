@@ -87,7 +87,6 @@ const createWorkProfile = wrapperAsync(async (req, res) => {
     });
   }
 
-
   res.status(httpStatus.CREATED).json({
     success: true,
     message: "Created successfully",
