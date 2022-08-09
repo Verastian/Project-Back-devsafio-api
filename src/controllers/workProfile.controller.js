@@ -3,9 +3,8 @@ const httpStatus = require('http-status');
 const { workProfileService, Database } = require("../services");
 
 
-
+//* one workprofile by id
 const getWorkProfile = wrapperAsync(async (req, res) => {
-
   const id = req.params
   const workprofile = await workProfileService.getWorkProfile(id)
 
@@ -15,6 +14,8 @@ const getWorkProfile = wrapperAsync(async (req, res) => {
     data: workprofile,
   });
 });
+
+//*list
 const getWorkProfiles = wrapperAsync(async (req, res) => {
   res.status(200).json({ success: true, message: "Work Profiles obtained" });
 
@@ -50,8 +51,6 @@ const createWorkProfile = wrapperAsync(async (req, res) => {
     educational_experience,
     soft_skills
   } = req.body
-  const items = database.map(ele => ele)
-  // console.log(items)
 
 
   const newWorkProfile = await workProfileService.createWorkProfile({
@@ -75,7 +74,11 @@ const createWorkProfile = wrapperAsync(async (req, res) => {
     work_availability,
     education_status,
     visa,
-    database
+    database,
+    dev_languages,
+    dev_tools,
+    educational_experience,
+    soft_skills
   })
 
 

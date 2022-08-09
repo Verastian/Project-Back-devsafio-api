@@ -1,34 +1,45 @@
 
 const { wrapperCommon } = require("../middlewares/async-wrapper");
-const { WorkProfile, Database, WorkProfileDatabases } = require("../models");
-const workprofile = require("../models/workprofile");
+const { WorkProfile, Database, DevLanguage, Tool } = require("../models");
 
+//* one workProfile  
 const getWorkProfile = wrapperCommon(async (id) => {
     const workprofile = await WorkProfile.findOne({
         where: id,
-        include: { model: Database }
+        include: [
+            { model: Database },
+            { model: DevLanguage },
+            { model: Tool }]
     })
     return workprofile;
 })
 
-
+//* create
 const createWorkProfile = wrapperCommon(async (attr) => {
-    // console.log(attr)
-    const workProfileOfAUser = await WorkProfile.create(attr,
-        // {
-        //     include: Database
-        // }
-    )
-    const DatabaseList = []
+
+    const workProfileOfAUser = await WorkProfile.create(attr)
+
     for (const data of attr.database) {
-        // { through: { level: data.level }
+        // TODO: replace by model service
         const foundDatabase = await Database.findOne({ where: data.database_id })
-        DatabaseList.push(foundDatabase)
         workProfileOfAUser.addDatabases(foundDatabase, { through: { level: data.level } })
     }
+    for (const data of attr.dev_languages) {
+        // TODO: replace by model service
+        const foundDevLanguage = await DevLanguage.findOne({ where: data.devLanguage_id })
+        workProfileOfAUser.addDevLanguages(foundDevLanguage, { through: { level: data.level } })
+    }
+
+    for (const data of attr.dev_tools) {
+        // TODO: replace by model service
+        const foundTool = await Tool.findOne({ where: data.tool_id })
+        workProfileOfAUser.addTools(foundTool)
+    }
+
     return workProfileOfAUser
 })
 
+// * Send data
 const getDataWorkprofile = wrapperCommon(() => {
     const educationLevels = WorkProfile.getAttributes().educational_level.values
     const relocationOptions = WorkProfile.getAttributes().relocation_option.values
