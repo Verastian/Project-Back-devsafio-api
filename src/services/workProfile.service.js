@@ -24,8 +24,8 @@ const createWorkProfile = wrapperCommon(async (attr) => {
         // { through: { level: data.level }
         const foundDatabase = await Database.findOne({ where: data.database_id })
         DatabaseList.push(foundDatabase)
+        workProfileOfAUser.addDatabases(foundDatabase, { through: { level: data.level } })
     }
-    workProfileOfAUser.setDatabases(DatabaseList)
     return workProfileOfAUser
 })
 
