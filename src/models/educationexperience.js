@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       EducationExperience.belongsToMany(models.WorkProfile, {
-        through: 'WorkProfileEducationExperiences',
+        through: 'WorkProfileEducationExperience',
         foreignKey: 'educationExperience_id',
         onDelete: 'CASCADE',
         // onUpdate: 'CASCADE', // optional
@@ -22,8 +22,27 @@ module.exports = (sequelize, DataTypes) => {
   EducationExperience.init({
     name: DataTypes.STRING,
     institute_name: DataTypes.STRING,
-    type: DataTypes.STRING,
-    area: DataTypes.STRING,
+    type: DataTypes.ENUM(
+      "postgrado",
+      "universidad",
+      "instituto",
+      "bootcamp",
+      "otro",
+    ),
+    area: DataTypes.ENUM(
+      "informática/sistemas/computación",
+      "diseño-gráfico/audiovisual",
+      "otra-ingeniería",
+      "soporte/redes",
+      "otra-carrera-técnica/profesional",
+      "full-stack",
+      "front-end",
+      "diseño-ux/diseño-ui",
+      "data-science/data-analysis",
+      "desarrollo-mobile",
+      "ciberseguridad",
+      "otra",
+    ),
     graduation_year: DataTypes.STRING
   }, {
     sequelize,

@@ -15,10 +15,29 @@ module.exports = {
         type: Sequelize.STRING
       },
       type: {
-        type: Sequelize.STRING
+        type: Sequelize.ENUM(
+          "postgrado",
+          "universidad",
+          "instituto",
+          "bootcamp",
+          "otro",
+        ),
       },
       area: {
-        type: Sequelize.STRING
+        type: Sequelize.ENUM(
+          "informática/sistemas/computación",
+          "diseño-gráfico/audiovisual",
+          "otra-ingeniería",
+          "soporte/redes",
+          "otra-carrera-técnica/profesional",
+          "full-stack",
+          "front-end",
+          "diseño-ux/diseño-ui",
+          "data-science/data-analysis",
+          "desarrollo-mobile",
+          "ciberseguridad",
+          "otra",
+        ),
       },
       graduation_year: {
         type: Sequelize.STRING

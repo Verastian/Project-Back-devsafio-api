@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     softSkill_id: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'WorkProfileSoftSkill',
+    modelName: 'WorkProfileSoftSkills',
   });
   return WorkProfileSoftSkill;
 };

@@ -1,6 +1,6 @@
 
 const { wrapperCommon } = require("../middlewares/async-wrapper");
-const { WorkProfile, Database, DevLanguage, Tool } = require("../models");
+const { WorkProfile, Database, DevLanguage, Tool, EducationExperience, SoftSkill } = require("../models");
 
 //* one workProfile  
 const getWorkProfile = wrapperCommon(async (id) => {
@@ -9,7 +9,10 @@ const getWorkProfile = wrapperCommon(async (id) => {
         include: [
             { model: Database },
             { model: DevLanguage },
-            { model: Tool }]
+            { model: Tool },
+            { model: EducationExperience },
+            { model: SoftSkill },
+        ]
     })
     return workprofile;
 })
@@ -35,6 +38,21 @@ const createWorkProfile = wrapperCommon(async (attr) => {
         const foundTool = await Tool.findOne({ where: data.tool_id })
         workProfileOfAUser.addTools(foundTool)
     }
+    for (const data of attr.soft_skills) {
+        // TODO: replace by model service
+        const foundSoftSkill = await SoftSkill.findOne({ where: data.softSkill_id })
+        workProfileOfAUser.addSoftSkills(foundSoftSkill)
+    }
+    for (const data of attr.educational_experience) {
+        // TODO: replace by model service
+        const saveEducationExperience = await EducationExperience.create(data)
+        workProfileOfAUser.addEducationExperience(saveEducationExperience)
+    }
+
+
+
+
+
 
     return workProfileOfAUser
 })
@@ -51,6 +69,12 @@ const getDataWorkprofile = wrapperCommon(() => {
     const workAvailabilities = WorkProfile.getAttributes().work_availability.values
     const educationStatuses = WorkProfile.getAttributes().education_status.values
     const visa = WorkProfile.getAttributes().visa.values
+    const educationalExperience = {}
+
+    const type = EducationExperience.getAttributes().type.values
+    const area = EducationExperience.getAttributes().area.values
+    educationalExperience['type'] = type
+    educationalExperience['area'] = area
 
     return {
         educationLevels,
@@ -62,7 +86,8 @@ const getDataWorkprofile = wrapperCommon(() => {
         englishLevels,
         workAvailabilities,
         educationStatuses,
-        visa
+        visa,
+        educationalExperience
     };
 })
 

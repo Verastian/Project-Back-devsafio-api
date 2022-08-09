@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         // onUpdate: 'CASCADE', // optional
       });
       WorkProfile.belongsToMany(models.SoftSkill, {
-        through: 'WorkProfileSoftSkill',
+        through: 'WorkProfileSoftSkills',
         foreignKey: 'workprofile_id',
         onDelete: 'CASCADE',
         // onUpdate: 'CASCADE', // optional
