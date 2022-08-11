@@ -1,9 +1,8 @@
 const express = require("express");
-const { ToolController } = require("../controllers");
-
+const { toolController } = require("../controllers");
 
 const router = express.Router();
 
-router.route("/").get(ToolController.getTool); //*get a user
+router.route("/").get(toolController.getTools);
 
-module.exports = router; 
+module.exports = router;

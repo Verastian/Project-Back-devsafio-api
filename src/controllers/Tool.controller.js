@@ -1,18 +1,18 @@
+const httpStatus = require('http-status');
 const { wrapperAsync } = require("../middlewares/async-wrapper");
-const { ToolService } = require("../services");
+const { toolService } = require("../services");
 
-
-const getTool = wrapperAsync(async (req, res) => {  
-  const Tool = await ToolService.getTool(req,res);
+const getTools = wrapperAsync(async (req, res) => {
+  const tools = await toolService.getTools();
   res
-  .status(200)
-  .json({ 
-    success: true, 
-    message: "tool obtained", 
-    data: Tool
-  });
+    .status(httpStatus.OK)
+    .json({
+      success: true,
+      message: "tools obtained",
+      data: tools
+    });
 });
 
 module.exports = {
-    getTool
+  getTools
 };
