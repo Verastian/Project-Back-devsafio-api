@@ -2,6 +2,7 @@ const express = require("express");
 const usersRoute = require("./user.route");
 const workProfileRoute = require("./workProfile.route");
 const authRoute = require("./auth.route");
+const devLanguagesRoute = require("./devLanguages.route");
 const toolRoute = require("./tool.route");
 const getonboard = require("./getOnBoard.route")
 
@@ -19,6 +20,10 @@ const defaultRoutes = [
   {
     path: "/auth",
     route: authRoute,
+  },
+  {
+    path: "/devlanguages",
+    route: devLanguagesRoute,
   },
   {
     path: "/tools",
