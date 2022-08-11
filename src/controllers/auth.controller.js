@@ -5,7 +5,7 @@ const { authService } = require("../services");
 const { createToken } = require("../utils/token.utils");
 const { comparePassword, encryptPassword } = require("../utils/password.utils");
 
-// login
+//*login
 const login = wrapperAsync(async (req, res) => {
   // Request body email or username
   const { email, password } = req.body;
@@ -39,12 +39,12 @@ const login = wrapperAsync(async (req, res) => {
   res.status(httpStatus.OK).json({
     success: true,
     message: "Login succesfull",
-    data: { user: { id, name, lastname, userEmail, status_id }},
+    data: { user: { id, name, lastname, userEmail, status_id } },
     token
   });
 });
 
-// register User
+//* register User
 const register = wrapperAsync(async (req, res) => {
   const { email, name, lastname, password, password_confirmation } =
     req.body.user;
@@ -64,13 +64,13 @@ const register = wrapperAsync(async (req, res) => {
       data: "",
     });
   }
-
+  console.log(user)
   const {
     id: userId,
     name: userName,
     lastname: userLastname,
     email: userEmail,
-    status: userStatus
+    userStatus_id: userStatus_id
   } = user;
 
   // Create a Token
@@ -84,7 +84,7 @@ const register = wrapperAsync(async (req, res) => {
         name: userName,
         lastname: userLastname,
         email: userEmail,
-        status: userStatus
+        status: userStatus_id
       }
     },
     token

@@ -49,11 +49,6 @@ const createWorkProfile = wrapperCommon(async (attr) => {
         workProfileOfAUser.addEducationExperience(saveEducationExperience)
     }
 
-
-
-
-
-
     return workProfileOfAUser
 })
 

@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      WorkProfile.hasOne(models.User, { foreignKey: 'user_id', as: 'user' })
+      // WorkProfile.hasOne(models.User, { foreignKey: 'user_id', as: 'user' })
       WorkProfile.belongsToMany(models.EducationExperience, {
         through: 'WorkProfileEducationExperience',
         foreignKey: 'workprofile_id',

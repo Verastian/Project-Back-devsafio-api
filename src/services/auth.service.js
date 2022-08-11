@@ -15,9 +15,9 @@ const getUserAuth = async (attr) => {
 };
 
 const createUserAuth = async (attr) => {
-  const activeStatus = getUserStatusByName(STATUS_ACTIVE);
-  const userFound = await User.create({ ...attr, status: activeStatus });
-
+  const activeStatus = await getUserStatusByName(STATUS_ACTIVE);
+  attr.userStatus_id = activeStatus.id
+  const userFound = await User.create(attr);
   return userFound;
 };
 
