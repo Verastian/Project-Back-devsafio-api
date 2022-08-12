@@ -1,21 +1,8 @@
 require("dotenv").config();
 const express = require("express");
-const sequelize = require("./src/config/database");
 const cors = require("cors");
 
 const routes = require("./src/routes/");
-
-// TODO: use Sequalize Migrations instead of forcing
-sequelize
-  .sync({
-    force: false,
-  })
-  .then(() => {
-    console.log("Connection has been established successfully.");
-  })
-  .catch((error) => {
-    console.error("Unable to connect to the database:", error);
-  });
 
 const app = express();
 

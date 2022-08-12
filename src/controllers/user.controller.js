@@ -17,13 +17,14 @@ const getUser = wrapperAsync(async (req, res) => {
 
   res.status(200).json({ success: true, message: "user obtained", data: user });
 });
+
 const saveUser = wrapperAsync(async (req, res) => {
   console.log("starting save user controller...");
 
-  const {email,password,name,lastName} = req.body;
+  const { email, password, name, lastName } = req.body;
   const passHash = await encryptPassword(password);
 
-  const userSaved = await userService.saveUser({email,password:passHash,name,lastName});
+  const userSaved = await userService.saveUser({ email, password: passHash, name, lastName });
   if (!userSaved) {
     return res
       .status(500)

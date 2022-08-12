@@ -1,4 +1,4 @@
-const { User, UserStatus }  = require("../models/");
+const { User, UserStatus } = require("../models");
 const { getUserStatusByName } = require("./user_status.service");
 
 const STATUS_ACTIVE = "active";
@@ -8,6 +8,7 @@ const getUserAuth = async (attr) => {
   const userFound = await User.findOne({
     where: attr,
     include: UserStatus,
+
   });
 
   return userFound;
