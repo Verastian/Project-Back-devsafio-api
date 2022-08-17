@@ -1,7 +1,6 @@
-const { validationResult } = require("express-validator");
 const httpStatus = require("http-status");
 const { wrapperAsync } = require("../middlewares/async-wrapper");
-const { authService } = require("../services");
+const { authService, userService, userStatusService } = require("../services");
 const { createToken } = require("../utils/token.utils");
 const { comparePassword, encryptPassword } = require("../utils/password.utils");
 
@@ -46,7 +45,7 @@ const login = wrapperAsync(async (req, res) => {
 
 //* register User
 const register = wrapperAsync(async (req, res) => {
-  const { email, name, lastname, password, password_confirmation } =
+  const { email, name, lastname, password } =
     req.body.user;
 
   const passHash = await encryptPassword(password);
@@ -64,7 +63,6 @@ const register = wrapperAsync(async (req, res) => {
       data: "",
     });
   }
-  console.log(user)
   const {
     id: userId,
     name: userName,
@@ -73,6 +71,7 @@ const register = wrapperAsync(async (req, res) => {
     userStatus_id: userStatus_id
   } = user;
 
+  const statusName = await userStatusService.getUserStatusByNameOrId(userStatus_id)
   // Create a Token
   const token = getToken({ id: userId, name: userName });
 
@@ -84,7 +83,7 @@ const register = wrapperAsync(async (req, res) => {
         name: userName,
         lastname: userLastname,
         email: userEmail,
-        status: userStatus_id
+        status: statusName.name
       }
     },
     token

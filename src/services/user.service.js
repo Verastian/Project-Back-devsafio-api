@@ -1,5 +1,5 @@
 const { wrapperCommon } = require("../middlewares/async-wrapper");
-const { User } = require("../models/");
+const { User, UserStatus, WorkProfile } = require("../models/");
 
 const getUserByEmail = wrapperCommon(async (email) => {
   return User.findOne({ where: { email: email } });
@@ -13,8 +13,17 @@ const getUsers = wrapperCommon(async () => {
 
 //*we get a user by Id obtained from params
 const getUser = wrapperCommon(async (attr) => {
-  const users = await User.findOne(attr);
-  return users;
+  console.log(attr)
+  const userFound = await User.findOne({
+    where: attr,
+    include: [
+      { model: UserStatus },
+      { model: WorkProfile },
+    ]
+
+  });
+
+  return userFound;
 });
 
 //*create

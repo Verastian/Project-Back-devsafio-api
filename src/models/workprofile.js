@@ -11,7 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // WorkProfile.hasOne(models.User, { foreignKey: 'user_id', as: 'user' })
+      WorkProfile.belongsTo(models.User, {
+        foreignKey: 'user_id',
+        targetKey: 'id',
+        onDelete: 'CASCADE'
+      })
       WorkProfile.belongsToMany(models.EducationExperience, {
         through: 'WorkProfileEducationExperience',
         foreignKey: 'workprofile_id',
@@ -123,6 +127,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'WorkProfile',
+
   });
   return WorkProfile;
 };

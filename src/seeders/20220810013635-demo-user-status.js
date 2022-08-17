@@ -10,7 +10,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        name: 'full-profile',
+        name: 'jobready',
         createdAt: new Date(),
         updatedAt: new Date()
       },

@@ -4,9 +4,9 @@ const { workProfileService, Database } = require("../services");
 
 
 //* one workprofile by User id
-const getWorkProfile = wrapperAsync(async (req, res) => {
+const getDataWorkprofileByUser = wrapperAsync(async (req, res) => {
   const userId = req.params
-  const workprofile = await workProfileService.getWorkProfile(userId)
+  const workprofile = await workProfileService.getWorkProfileByIdUser(userId)
 
   return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
     success: false,
@@ -63,7 +63,7 @@ const getDataWorkprofile = wrapperAsync(async (req, res) => {
 
 
 module.exports = {
-  getWorkProfile,
+  getDataWorkprofileByUser,
   createWorkProfile,
   getWorkProfiles,
   updateWorkProfile,

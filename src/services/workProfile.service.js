@@ -1,18 +1,20 @@
 
 const { wrapperCommon } = require("../middlewares/async-wrapper");
-const { WorkProfile, Database, DevLanguage, Tool, EducationExperience, SoftSkill } = require("../models");
+const { WorkProfile, Database, DevLanguage, Tool, EducationExperience, SoftSkill, User, WorkProfileDatabases } = require("../models");
 
-//* one workProfile  
-const getWorkProfile = wrapperCommon(async (id) => {
+//* one workProfile  by User
+const getWorkProfileByIdUser = wrapperCommon(async (userId) => {
     const workprofile = await WorkProfile.findOne({
-        where: id,
+        where: userId,
         include: [
+            { model: User, attributes: { exclude: ["password"] } },
             { model: Database },
             { model: DevLanguage },
             { model: Tool },
             { model: EducationExperience },
             { model: SoftSkill },
-        ]
+        ],
+        attributes: { exclude: ['user_id'] }
     })
     return workprofile;
 })
@@ -90,5 +92,5 @@ const getDataWorkprofile = wrapperCommon(() => {
 module.exports = {
     getDataWorkprofile,
     createWorkProfile,
-    getWorkProfile
+    getWorkProfileByIdUser
 }

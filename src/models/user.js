@@ -14,10 +14,14 @@ module.exports = (sequelize, DataTypes) => {
       User.belongsTo(models.UserStatus,
         {
           foreignKey: 'userStatus_id',
-          as: 'status',
           onDelete: 'CASCADE',
         }
-      )
+      );
+      User.hasOne(models.WorkProfile, {
+        foreignKey: 'user_id',
+        targetKey: 'id',
+        onDelete: 'CASCADE'
+      });
     }
   }
   User.init({
