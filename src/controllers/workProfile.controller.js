@@ -1,17 +1,19 @@
 const { wrapperAsync } = require("../middlewares/async-wrapper");
 const httpStatus = require('http-status');
 const { workProfileService, Database } = require("../services");
+const workProfileView = require('../views/workProfile.view');
 
 
 //* one workprofile by User id
 const getDataWorkprofileByUser = wrapperAsync(async (req, res) => {
   const userId = req.params
-  const workprofile = await workProfileService.getWorkProfileByIdUser(userId)
+  const workProfile = await workProfileService.getWorkProfileByIdUser(userId)
+  const response = workProfileView(workProfile);
 
   return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
     success: false,
     message: "Work Profile obtained",
-    data: { work_profile: workprofile },
+    data: response,
   });
 });
 const getWorkProfiles = wrapperAsync(async (req, res) => {
@@ -19,7 +21,7 @@ const getWorkProfiles = wrapperAsync(async (req, res) => {
 
 });
 
-// * Create 
+// * Create
 const createWorkProfile = wrapperAsync(async (req, res) => {
 
   const { work_profile } = req.body
