@@ -11,7 +11,7 @@ module.exports = {
       workprofile_id: {
         type: Sequelize.INTEGER
       },
-      softSkill_id: {
+      soft_skill_id: {
         type: Sequelize.INTEGER
       },
       createdAt: {

@@ -2,6 +2,10 @@ const express = require("express");
 const usersRoute = require("./user.route");
 const workProfileRoute = require("./workProfile.route");
 const authRoute = require("./auth.route");
+const databasesRoute = require("./databases.route");
+const devLanguagesRoute = require("./devLanguages.route");
+const toolRoute = require("./tool.route");
+const getonboard = require("./getOnBoard.route")
 
 const router = express.Router();
 
@@ -17,7 +21,23 @@ const defaultRoutes = [
   {
     path: "/auth",
     route: authRoute,
-  }
+  },
+  {
+    path: "/databases",
+    route: databasesRoute,
+  },
+  {
+    path: "/devlanguages",
+    route: devLanguagesRoute,
+  },
+  {
+    path: "/tools",
+    route: toolRoute,
+  },
+  {
+    path: "/getonboard",
+    route: getonboard,
+  },
 ];
 
 for (const route of defaultRoutes) {

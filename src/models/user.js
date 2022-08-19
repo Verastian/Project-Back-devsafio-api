@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       User.belongsTo(models.UserStatus,
         {
-          foreignKey: 'userStatus_id',
+          foreignKey: 'user_status_id',
           onDelete: 'CASCADE',
         }
       );
@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   User.init({
-    userStatus_id: DataTypes.INTEGER,
+    user_status_id: DataTypes.INTEGER,
     name: DataTypes.STRING,
     lastname: DataTypes.STRING,
     email: DataTypes.STRING,

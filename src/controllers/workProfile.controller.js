@@ -14,8 +14,6 @@ const getDataWorkprofileByUser = wrapperAsync(async (req, res) => {
     data: { work_profile: workprofile },
   });
 });
-
-//*list
 const getWorkProfiles = wrapperAsync(async (req, res) => {
   res.status(200).json({ success: true, message: "Work Profiles obtained" });
 
@@ -42,14 +40,12 @@ const createWorkProfile = wrapperAsync(async (req, res) => {
   });
 });
 
-
 const updateWorkProfile = wrapperAsync(async (req, res) => {
   res.status(200).json({ success: true, message: "Work Profile updated" });
 });
 const deleteWorkProfile = wrapperAsync(async (req, res) => {
   res.status(200).json({ success: true, message: "Work Profile deleted" });
 });
-
 
 const getDataWorkprofile = wrapperAsync(async (req, res) => {
   const getDataWorkprofile = await workProfileService.getDataWorkprofile()
@@ -68,6 +64,5 @@ module.exports = {
   getWorkProfiles,
   updateWorkProfile,
   deleteWorkProfile,
-
   getDataWorkprofile
 };

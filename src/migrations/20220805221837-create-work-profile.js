@@ -23,7 +23,7 @@ module.exports = {
       cv_url: {
         type: Sequelize.STRING
       },
-      linkendin_url: {
+      linkedin_url: {
         type: Sequelize.STRING
       },
       github_url: {

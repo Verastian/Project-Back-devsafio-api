@@ -2,10 +2,10 @@ const { Op } = require("sequelize");
 const { wrapperCommon } = require("../middlewares/async-wrapper");
 const { UserStatus } = require("../models");
 
-const getUserStatusByNameOrId = wrapperCommon(async (attr) => {
+const getUserStatusByNameOrId = wrapperCommon(async (status) => {
 
-  let typeString = typeof attr === 'string' ? attr : null
-  let typeNum = typeof attr === 'number' ? attr : null
+  let typeString = typeof status === 'string' ? status : null
+  let typeNum = typeof status === 'number' ? status : null
 
   return await UserStatus.findOne({
     where: {
@@ -14,6 +14,5 @@ const getUserStatusByNameOrId = wrapperCommon(async (attr) => {
     }
   });
 });
-
 
 module.exports = { getUserStatusByNameOrId, };

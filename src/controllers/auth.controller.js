@@ -45,8 +45,7 @@ const login = wrapperAsync(async (req, res) => {
 
 //* register User
 const register = wrapperAsync(async (req, res) => {
-  const { email, name, lastname, password } =
-    req.body.user;
+  const { email, name, lastname, password } = req.body.user;
 
   const passHash = await encryptPassword(password);
 
@@ -56,6 +55,7 @@ const register = wrapperAsync(async (req, res) => {
     lastname,
     password: passHash,
   });
+
   if (!user) {
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
       success: false,
@@ -68,7 +68,7 @@ const register = wrapperAsync(async (req, res) => {
     name: userName,
     lastname: userLastname,
     email: userEmail,
-    userStatus_id: userStatus_id
+    user_status_id: userStatus_id
   } = user;
 
   const statusName = await userStatusService.getUserStatusByNameOrId(userStatus_id)

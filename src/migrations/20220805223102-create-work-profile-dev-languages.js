@@ -14,7 +14,7 @@ module.exports = {
       workprofile_id: {
         type: Sequelize.INTEGER
       },
-      devLanguage_id: {
+      dev_language_id: {
         type: Sequelize.INTEGER
       },
       createdAt: {

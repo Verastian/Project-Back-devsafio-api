@@ -1,7 +1,5 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class WorkProfile extends Model {
     /**
@@ -19,38 +17,32 @@ module.exports = (sequelize, DataTypes) => {
       WorkProfile.belongsToMany(models.EducationExperience, {
         through: 'WorkProfileEducationExperience',
         foreignKey: 'workprofile_id',
-        onDelete: 'CASCADE',
-        // onUpdate: 'CASCADE', // optional
+        onDelete: 'CASCADE'
       });
       WorkProfile.belongsToMany(models.DevLanguage, {
-        through: 'WorkProfileDevLanguages',
+        through: 'WorkProfileDevLanguage',
         foreignKey: 'workprofile_id',
-        onDelete: 'CASCADE',
-        // onUpdate: 'CASCADE', // optional
+        onDelete: 'CASCADE'
       });
       WorkProfile.belongsToMany(models.SoftSkill, {
-        through: 'WorkProfileSoftSkills',
+        through: 'WorkProfileSoftSkill',
         foreignKey: 'workprofile_id',
-        onDelete: 'CASCADE',
-        // onUpdate: 'CASCADE', // optional
+        onDelete: 'CASCADE'
       });
       WorkProfile.belongsToMany(models.Tool, {
         through: 'WorkProfileTool',
         foreignKey: 'workprofile_id',
-        onDelete: 'CASCADE',
-        // onUpdate: 'CASCADE', // optional
+        onDelete: 'CASCADE'
       });
       WorkProfile.belongsToMany(models.Role, {
         through: 'WorkProfileRole',
         foreignKey: 'workprofile_id',
-        onDelete: 'CASCADE',
-        // onUpdate: 'CASCADE', // optional
+        onDelete: 'CASCADE'
       });
       WorkProfile.belongsToMany(models.Database, {
-        through: 'WorkProfileDatabases',
+        through: 'WorkProfileDatabase',
         foreignKey: 'workprofile_id',
-        onDelete: 'CASCADE',
-        // onUpdate: 'CASCADE', // optional
+        onDelete: 'CASCADE'
       });
     }
   }
@@ -60,7 +52,7 @@ module.exports = (sequelize, DataTypes) => {
     phone_number: DataTypes.STRING,
     city: DataTypes.STRING,
     cv_url: DataTypes.STRING,
-    linkendin_url: DataTypes.STRING,
+    linkedin_url: DataTypes.STRING,
     github_url: DataTypes.STRING,
     featured_project: DataTypes.STRING,
     other_technologies_comment: DataTypes.STRING,

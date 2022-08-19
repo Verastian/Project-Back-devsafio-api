@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Role.belongsToMany(models.WorkProfile, {
-        through: 'WorkProfileRoles',
+        through: 'WorkProfileRole',
         foreignKey: 'role_id',
         onDelete: 'CASCADE',
         // onUpdate: 'CASCADE', // optional

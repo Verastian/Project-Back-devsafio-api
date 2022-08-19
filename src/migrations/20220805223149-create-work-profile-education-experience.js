@@ -11,7 +11,7 @@ module.exports = {
       workprofile_id: {
         type: Sequelize.INTEGER
       },
-      educationExperience_id: {
+      education_experience_id: {
         type: Sequelize.INTEGER
       },
       createdAt: {

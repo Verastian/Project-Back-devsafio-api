@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       EducationExperience.belongsToMany(models.WorkProfile, {
         through: 'WorkProfileEducationExperience',
-        foreignKey: 'educationExperience_id',
+        foreignKey: 'education_experience_id',
         onDelete: 'CASCADE',
         // onUpdate: 'CASCADE', // optional
       });

@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       SoftSkill.belongsToMany(models.WorkProfile, {
-        through: 'WorkProfileSoftSkills',
-        foreignKey: 'softSkill_id',
+        through: 'WorkProfileSoftSkill',
+        foreignKey: 'soft_skill_id',
         onDelete: 'CASCADE',
         // onUpdate: 'CASCADE', // optional
       });
