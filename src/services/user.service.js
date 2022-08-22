@@ -11,11 +11,9 @@ const getUsers = wrapperCommon(async () => {
   return users;
 });
 
-//*we get a user by Id obtained from params
-const getUser = wrapperCommon(async (attr) => {
-  console.log(attr)
+const getUserById = wrapperCommon(async (id) => {
   const userFound = await User.findOne({
-    where: attr,
+    where: id,
     include: [
       { model: UserStatus },
       { model: WorkProfile },
@@ -42,4 +40,4 @@ const deleteUser = wrapperCommon(async (attr) => {
 
 });
 
-module.exports = { getUserByEmail, getUsers, getUser, saveUser, updateUser, deleteUser };
+module.exports = { getUserByEmail, getUsers, getUserById, saveUser, updateUser, deleteUser };

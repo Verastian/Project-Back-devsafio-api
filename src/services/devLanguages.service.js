@@ -1,13 +1,19 @@
+const { wrapperCommon } = require("../middlewares/async-wrapper");
 const { DevLanguage } = require("../models");
 
-const getDevLanguages = async () => {
-  try {
-    return await DevLanguage.findAll();
-  } catch (error) {
-    throw new Error(error);
-  }
-};
+const getDevLanguages = wrapperCommon(async () => {
+  return await DevLanguage.findAll();
+});
+
+
+const getDevLanguageById = wrapperCommon(async (id) => {
+  const devLanguageFound = await DevLanguage.findOne({
+    where: id,
+  });
+  return devLanguageFound
+})
 
 module.exports = {
-  getDevLanguages
+  getDevLanguages,
+  getDevLanguageById,
 };

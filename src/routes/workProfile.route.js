@@ -1,15 +1,18 @@
 const express = require("express");
 const { workProfileController } = require("../controllers/");
+const validateFields = require("../middlewares/validate-fields");
+const { validateFieldsWorkProfile } = require("../validators/workprofile.validator");
+
 
 const router = express.Router();
 
-router.route("/").get(workProfileController.getWorkProfiles);
-router.route("/").post(workProfileController.createWorkProfile);
-router.route("/users/:user_id").get(workProfileController.getDataWorkprofileByUser);
-router.route("/update/:id").patch(workProfileController.updateWorkProfile);
-router.route("/delete/:id").delete(workProfileController.deleteWorkProfile);
+router.get("/", workProfileController.getWorkProfiles);
+router.post("/", [validateFieldsWorkProfile, validateFields], workProfileController.createWorkProfile);
+router.get("/users/:user_id", workProfileController.getDataWorkprofileByUser);
+router.patch("/update/:id", workProfileController.updateWorkProfile);
+router.delete("/delete/:id", workProfileController.deleteWorkProfile);
 
 // Get enum Values
-router.route("/data-workprofile").get(workProfileController.getDataWorkprofile);
+router.get("/data-workprofile", workProfileController.getDataWorkprofile);
 
 module.exports = router;

@@ -1,10 +1,9 @@
 const { wrapperAsync } = require("../middlewares/async-wrapper");
 const httpStatus = require('http-status');
-const { workProfileService, Database } = require("../services");
+const { workProfileService } = require("../services");
 const workProfileView = require('../views/workProfile.view');
 
 
-//* one workprofile by User id
 const getDataWorkprofileByUser = wrapperAsync(async (req, res) => {
   const userId = req.params
   const workProfile = await workProfileService.getWorkProfileByIdUser(userId)
@@ -21,7 +20,6 @@ const getWorkProfiles = wrapperAsync(async (req, res) => {
 
 });
 
-// * Create
 const createWorkProfile = wrapperAsync(async (req, res) => {
 
   const { work_profile } = req.body

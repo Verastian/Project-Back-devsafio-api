@@ -14,13 +14,13 @@ const validateRegister = [
     // Indicates the success of this synchronous custom validator
     return true;
   }),
-  /*  body('user.email').exists().isEmail().custom(value => {
-     return userService.getUserByEmail(value).then(user => {
-       if (user) {
-         return Promise.reject('E-mail already in use');
-       }
-     });
-   }), */
+  body('user.email').exists().isEmail().custom(value => {
+    return userService.getUserByEmail(value).then(user => {
+      if (user) {
+        return Promise.reject('E-mail already in use');
+      }
+    });
+  }),
 ];
 
 const validateLogin = [

@@ -5,3 +5,4 @@ module.exports.userStatusService = require("./user_status.service");
 module.exports.databasesService = require("./databases.service");
 module.exports.devLanguagesService = require("./devLanguages.service");
 module.exports.toolService = require("./tool.service");
+module.exports.softSkillService = require("./softSkill.service");
