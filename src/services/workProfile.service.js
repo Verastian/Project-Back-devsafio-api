@@ -1,5 +1,5 @@
 const { wrapperCommon } = require("../middlewares/async-wrapper");
-const { WorkProfile, Database, DevLanguage, Tool, EducationExperience, SoftSkill, User, WorkProfileDatabases } = require("../models");
+const { WorkProfile, Database, DevLanguage, Tool, EducationExperience, SoftSkill, User } = require("../models");
 
 //* one workProfile  by User
 const getWorkProfileByIdUser = wrapperCommon(async (userId) => {
@@ -23,7 +23,7 @@ const createWorkProfile = wrapperCommon(async (attr) => {
 
     const workProfileOfAUser = await WorkProfile.create(attr)
 
-    for (const data of attr.database) {
+    for (const data of attr.databases) {
         // TODO: replace by model service
         const foundDatabase = await Database.findOne({ where: data.database_id })
         workProfileOfAUser.addDatabases(foundDatabase, { through: { level: data.level } })
