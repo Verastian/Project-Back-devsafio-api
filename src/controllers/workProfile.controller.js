@@ -6,6 +6,7 @@ const workProfileView = require('../views/workProfile.view');
 
 const getDataWorkprofileByUser = wrapperAsync(async (req, res) => {
   const userId = req.params
+
   const workProfile = await workProfileService.getWorkProfileByIdUser(userId)
   const response = workProfileView(workProfile);
 

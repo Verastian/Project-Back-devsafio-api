@@ -17,8 +17,9 @@ const getUserById = wrapperCommon(async (id) => {
     include: [
       { model: UserStatus },
       { model: WorkProfile },
-    ]
-
+    ],
+    raw: true,
+    nest: true,
   });
 
   return userFound;
