@@ -1,27 +1,21 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('EducationExperiences', {
+    await queryInterface.createTable('WorkProfileDevLanguages', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING
+      level: {
+        type: Sequelize.INTEGER
       },
-      institute_name: {
-        type: Sequelize.STRING
+      workprofile_id: {
+        type: Sequelize.INTEGER
       },
-      type: {
-        type: Sequelize.STRING
-      },
-      area: {
-        type: Sequelize.STRING
-      },
-      graduation_year: {
-        type: Sequelize.STRING
+      dev_language_id: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -34,6 +28,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('EducationExperiences');
+    await queryInterface.dropTable('WorkProfileDevLanguages');
   }
 };

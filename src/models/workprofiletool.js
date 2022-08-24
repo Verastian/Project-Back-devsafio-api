@@ -1,7 +1,5 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class WorkProfileTool extends Model {
     /**
@@ -14,10 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   WorkProfileTool.init({
-    count: DataTypes.INTEGER,
     workprofile_id: DataTypes.INTEGER,
-    tool_id: DataTypes.INTEGER,
-
+    tool_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'WorkProfileTool',

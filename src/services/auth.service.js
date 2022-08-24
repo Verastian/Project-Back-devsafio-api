@@ -1,5 +1,5 @@
 const { User, UserStatus } = require("../models");
-const { getUserStatusByName } = require("./user_status.service");
+const { getUserStatusByName, getUserStatusByNameOrId } = require("./user_status.service");
 
 const STATUS_ACTIVE = "active";
 
@@ -14,10 +14,10 @@ const getUserAuth = async (attr) => {
   return userFound;
 };
 
-const createUserAuth = async (attr) => {
-  const activeStatus = getUserStatusByName(STATUS_ACTIVE);
-  const userFound = await User.create({ ...attr, status: activeStatus });
-
+const createUserAuth = async (user) => {
+  const activeStatus = await getUserStatusByNameOrId(STATUS_ACTIVE);
+  user.user_status_id = activeStatus.id
+  const userFound = await User.create(user);
   return userFound;
 };
 

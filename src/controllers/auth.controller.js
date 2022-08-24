@@ -1,11 +1,10 @@
-const { validationResult } = require("express-validator");
 const httpStatus = require("http-status");
 const { wrapperAsync } = require("../middlewares/async-wrapper");
-const { authService } = require("../services");
+const { authService, userService, userStatusService } = require("../services");
 const { createToken } = require("../utils/token.utils");
 const { comparePassword, encryptPassword } = require("../utils/password.utils");
 
-// login
+//*login
 const login = wrapperAsync(async (req, res) => {
   // Request body email or username
   const { email, password } = req.body;
@@ -33,21 +32,29 @@ const login = wrapperAsync(async (req, res) => {
   // Create a Token
   const token = getToken({ id: userFound.id, name: userFound.name });
 
-  const { id, name, lastname, email: userEmail, status_id } = userFound;
+  const { id, name, lastname, email: userEmail, UserStatus } = userFound;
 
 
   res.status(httpStatus.OK).json({
     success: true,
     message: "Login succesfull",
-    data: { user: { id, name, lastname, userEmail, status_id }},
+    data: {
+      user:
+      {
+        id,
+        name,
+        lastname,
+        userEmail,
+        status: UserStatus?.name
+      }
+    },
     token
   });
 });
 
-// register User
+//* register User
 const register = wrapperAsync(async (req, res) => {
-  const { email, name, lastname, password, password_confirmation } =
-    req.body.user;
+  const { email, name, lastname, password } = req.body.user;
 
   const passHash = await encryptPassword(password);
 
@@ -57,6 +64,7 @@ const register = wrapperAsync(async (req, res) => {
     lastname,
     password: passHash,
   });
+
   if (!user) {
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
       success: false,
@@ -70,9 +78,10 @@ const register = wrapperAsync(async (req, res) => {
     name: userName,
     lastname: userLastname,
     email: userEmail,
-    status: userStatus
+    user_status_id: userStatusId,
   } = user;
 
+  const userStatus = await userStatusService.getUserStatusByNameOrId(userStatusId)
   // Create a Token
   const token = getToken({ id: userId, name: userName });
 
@@ -84,7 +93,7 @@ const register = wrapperAsync(async (req, res) => {
         name: userName,
         lastname: userLastname,
         email: userEmail,
-        status: userStatus
+        status: userStatus.name
       }
     },
     token

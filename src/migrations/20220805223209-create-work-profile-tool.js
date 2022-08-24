@@ -8,25 +8,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      count: {
+      workprofile_id: {
         type: Sequelize.INTEGER
       },
-      workprofile_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'WorkProfiles',
-          key: 'id'
-        },
-
-        allowNull: false,
-      },
       tool_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Tools',
-          key: 'id'
-        },
-        allowNull: false,
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

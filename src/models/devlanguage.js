@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       DevLanguage.belongsToMany(models.WorkProfile, {
         through: 'WorkProfileDevLanguage',
-        foreignKey: 'devLanguage_id',
+        foreignKey: 'dev_language_id',
         onDelete: 'CASCADE',
         // onUpdate: 'CASCADE', // optional
       });

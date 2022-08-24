@@ -6,4 +6,5 @@ const createToken = (payload, expires) => {
   });
   return token;
 };
+
 module.exports = { createToken };

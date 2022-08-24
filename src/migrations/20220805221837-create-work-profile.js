@@ -8,6 +8,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      user_id: {
+        type: Sequelize.INTEGER
+      },
       country: {
         type: Sequelize.STRING
       },
@@ -20,7 +23,7 @@ module.exports = {
       cv_url: {
         type: Sequelize.STRING
       },
-      linkendin_url: {
+      linkedin_url: {
         type: Sequelize.STRING
       },
       github_url: {
@@ -36,7 +39,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       educational_level: {
-        type: Sequelize.ENUM, values: [
+        type: Sequelize.ENUM(
           "universidad-completa",
           "universidad-incompleta-o-en-curso",
           "instituto-profesional-o-cft-completa",
@@ -45,93 +48,83 @@ module.exports = {
           "bootcamp-completo",
           "bootcamp-incompleto-o-en-curso",
           "escolar-completa",
-          "escolar-incompleta",
-
-        ],
+          "escolar-incompleta"),
         allowNull: false
       },
       relocation_option: {
-        type: Sequelize.ENUM, values: [
+        type: Sequelize.ENUM(
           "quiero-trabajo-desde-mi-ciudad",
           "estoy-disponible-a-migrar-de-mi-ciudad-dentro-de-mi-país",
-          "estoy-disponible-para-migrar-a-otro-país"],
+          "estoy-disponible-para-migrar-a-otro-país"),
         allowNull: false,
       },
       dev_experience: {
-        type: Sequelize.ENUM, values: [
+        type: Sequelize.ENUM(
           "sin-experiencia",
           "0-a-1-años",
           "1-a-2-años",
           "2-a-4-años",
-          "5+-años"],
+          "5+-años"),
         allowNull: false
       },
       design_experience: {
-        type: Sequelize.ENUM, values: [
+        type: Sequelize.ENUM(
           "sin-experiencia",
           "0-a-1-años",
           "1-a-2-años",
           "2-a-4-años",
-          "5+-años"],
-        allowNull: false,
+          "5+-años"),
+        allowNull: false
       },
       data_experience: {
-        type: Sequelize.ENUM, values: [
+        type: Sequelize.ENUM(
           "sin-experiencia",
           "0-a-1-años",
           "1-a-2-años",
           "2-a-4-años",
-          "5+-años"],
+          "5+-años"),
         allowNull: false
       },
       gender: {
-        type: Sequelize.ENUM, values: [
+        type: Sequelize.ENUM(
           "masculino",
           "femenino",
           "otro",
-          "prefiero-no-decirlo"],
+          "prefiero-no-decirlo"),
         allowNull: false,
       },
       english_level: {
-        type: Sequelize.ENUM, values: [
+        type: Sequelize.ENUM(
           "ninguno",
           "principiante-a1",
           "principiante-a2",
           "pre-intermedio-b1",
           "intermedio-b2",
           "intermedio-avanzado-c1",
-          "avanzado-c2"],
+          "avanzado-c2"),
         allowNull: false,
       },
       work_availability: {
-        type: Sequelize.ENUM, values: [
+        type: Sequelize.ENUM(
           "fulltime",
           "part-time",
-          "freelancer"],
+          "freelancer"),
         allowNull: false,
       },
       education_status: {
-        type: Sequelize.ENUM, values: [
+        type: Sequelize.ENUM(
           "egresado/a",
           "titulado/a",
-          "en-curso"],
+          "en-curso"),
         allowNull: false,
       },
       visa: {
-        type: Sequelize.ENUM, values: [
+        type: Sequelize.ENUM(
           "estados-unidos",
           "union-europea",
-          "mi-país-de-recidencia-actual",
-          "otros-paises"],
+          "mi-país-de-residencia-actual",
+          "otros-paises"),
         allowNull: false,
-      },
-
-      user_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Users',
-          key: 'id'
-        }
       },
       createdAt: {
         allowNull: false,

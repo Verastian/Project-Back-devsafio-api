@@ -11,16 +11,25 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.hasOne(models.WorkProfile, { foreignKey: "user_id" });
-      User.belongsTo(models.UserStatus)
+      User.belongsTo(models.UserStatus,
+        {
+          foreignKey: 'user_status_id',
+          onDelete: 'CASCADE',
+        }
+      );
+      User.hasOne(models.WorkProfile, {
+        foreignKey: 'user_id',
+        targetKey: 'id',
+        onDelete: 'CASCADE'
+      });
     }
   }
   User.init({
+    user_status_id: DataTypes.INTEGER,
     name: DataTypes.STRING,
     lastname: DataTypes.STRING,
     email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    status_id: DataTypes.INTEGER,
+    password: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'User',
