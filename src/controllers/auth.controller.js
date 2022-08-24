@@ -39,12 +39,11 @@ const login = wrapperAsync(async (req, res) => {
     success: true,
     message: "Login succesfull",
     data: {
-      user:
-      {
+      user: {
         id,
         name,
         lastname,
-        userEmail,
+        email: userEmail,
         status: UserStatus?.name
       }
     },
